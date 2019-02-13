@@ -9,11 +9,13 @@ import Foundation
 import Commandant
 import Result
 
-struct FindCommand: CommandProtocol {
+public struct FindCommand: CommandProtocol {
     public let verb = "find"
     public let function = "Find files that are not referenced in any Xcode projects"
     
-    func run(_ options: Options) -> Result<(), CommandantError<()>> {
+    public init() {}
+    
+    public func run(_ options: Options) -> Result<(), CommandantError<()>> {
         print("Finding files in: \(options.path)")
         return StepPipeline(steps: [
             FileGatherStep(),

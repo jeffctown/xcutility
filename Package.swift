@@ -5,16 +5,27 @@ import PackageDescription
 
 let package = Package(
     name: "xcodemissing",
+    products: [
+        .library(
+            name: "XcodeMissingFramework",
+            targets: ["XcodeMissingFramework"]),
+        .executable(
+            name: "xcodemissing",
+            targets: ["xcodemissing"])
+    ],
     dependencies: [
-	.package(url: "https://github.com/tuist/xcodeproj.git", from: "6.5.0"),
-	.package(url: "https://github.com/Carthage/Commandant.git", from: "0.15.0")
+        .package(url: "https://github.com/tuist/xcodeproj.git", from: "6.5.0"),
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.15.0")
     ],
     targets: [
         .target(
             name: "xcodemissing",
-            dependencies: ["xcodeproj","Commandant"]),
+            dependencies: ["XcodeMissingFramework","Commandant"]),
+        .target(
+            name: "XcodeMissingFramework",
+            dependencies: ["xcodeproj", "Commandant"]),
         .testTarget(
-            name: "xcodemissingTests",
-            dependencies: ["xcodemissing"]),
+            name: "XcodeMissingFrameworkTests",
+            dependencies: ["XcodeMissingFramework"]),
     ]
 )

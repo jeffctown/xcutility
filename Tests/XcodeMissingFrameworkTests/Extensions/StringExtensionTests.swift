@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-import PathKit
+import XcodeMissingFramework
 
 final class StringExtensionsTests: XCTestCase {
     

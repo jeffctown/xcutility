@@ -17,7 +17,7 @@ extension Path {
         return try self.recursiveChildren().filter(isIncluded)
     }
     
-    func isValid(context: StepPipelineContext) -> Bool {
+    public func isValid(context: StepPipelineContext) -> Bool {
         if context.verbose {
             print("Validating File: \(self.string).")
         }
@@ -27,7 +27,7 @@ extension Path {
         return isFile && staticallyValid && validFileExtension
     }
     
-    func isStaticallyValid(context: StepPipelineContext) -> Bool {
+    public func isStaticallyValid(context: StepPipelineContext) -> Bool {
         let string = self.string
         // should this go in a file?  .xcodemissingignore or yaml file?
         let staticallyValid = !string.containsPods &&
@@ -54,7 +54,7 @@ extension Path {
         return staticallyValid
     }
     
-    func isValidExtension(context: StepPipelineContext) -> Bool {
+    public func isValidExtension(context: StepPipelineContext) -> Bool {
         let string = self.string
         var isValidExtension = context.extensions.count > 0 ? false : true
         for ext in context.extensions {

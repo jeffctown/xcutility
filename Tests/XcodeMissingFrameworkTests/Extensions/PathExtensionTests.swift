@@ -7,6 +7,7 @@
 
 import XCTest
 import PathKit
+import XcodeMissingFramework
 
 final class PathExtensionsTests: XCTestCase {
     

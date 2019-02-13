@@ -1,4 +1,5 @@
 import Commandant
+import XcodeMissingFramework
 
 let registry = CommandRegistry<CommandantError<()>>()
 registry.register(DeleteCommand())

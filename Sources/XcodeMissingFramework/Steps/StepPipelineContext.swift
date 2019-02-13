@@ -9,7 +9,7 @@ import Foundation
 import xcodeproj
 import PathKit
 
-class StepPipelineContext {
+public class StepPipelineContext {
     let verbose: Bool
     let extensions: [String]
     let path: Path
@@ -17,7 +17,7 @@ class StepPipelineContext {
     var xcodeProjects = [XcodeProj]()
     var unusedFiles = [String]()
     
-    init(verbose: Bool, extensions: [String], path: Path) {
+    public init(verbose: Bool, extensions: [String], path: Path) {
         self.verbose = verbose
         self.extensions = extensions
         self.path = path
