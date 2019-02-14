@@ -56,7 +56,7 @@ class XcodeReferenceGatherStepTests: XCTestCase {
     
     func testNoExceptionIsThrownForInvalidProject() {
         let xcodeRefStep = XcodeReferenceGatherStep()
-        let context = StepPipelineContext(verbose: false, extensions: [], path: invalidProjectPath)
+        let context = StepPipelineContext(verbose: true, extensions: [], path: invalidProjectPath)
         do {
             try xcodeRefStep.run(context: context)
             XCTAssert(true)

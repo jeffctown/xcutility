@@ -1,6 +1,4 @@
 install: true
-git:
-  submodules: false
 cache:
   directories:
     - .build/checkouts # SwiftPM
