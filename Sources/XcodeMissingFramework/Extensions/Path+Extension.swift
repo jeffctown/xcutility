@@ -12,11 +12,11 @@ extension Path {
     public var isXcodeProject: Bool {
         return self.absolute().string.hasSuffix(".xcodeproj")
     }
-    
+
     public func recursiveFilter(isIncluded: (Path) -> Bool) throws -> [Path] {
         return try self.recursiveChildren().filter(isIncluded)
     }
-    
+
     public func isValid(context: StepPipelineContext) -> Bool {
         if context.verbose {
             print("Validating File: \(self.string).")
@@ -26,7 +26,7 @@ extension Path {
         let validFileExtension = self.isValidExtension(context: context)
         return isFile && staticallyValid && validFileExtension
     }
-    
+
     public func isStaticallyValid(context: StepPipelineContext) -> Bool {
         let string = self.string
         // should this go in a file?  .xcodemissingignore or yaml file?
@@ -45,15 +45,15 @@ extension Path {
             !string.containsGemfile &&
             !string.containsPlaygroundExtension &&
             !string.containsIdeaExtension
-        
+
         if context.verbose {
             let passedOrFailed = staticallyValid ? "passed" : "failed"
             print("File \(string) \(passedOrFailed) static validation.")
         }
-        
+
         return staticallyValid
     }
-    
+
     public func isValidExtension(context: StepPipelineContext) -> Bool {
         let string = self.string
         var isValidExtension = context.extensions.count > 0 ? false : true

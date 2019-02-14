@@ -5,19 +5,18 @@
 //  Created by Jeff Lett on 2/13/19.
 //
 
-import XCTest
-@testable import XcodeMissingFramework
 import PathKit
+@testable import XcodeMissingFramework
+import XCTest
 
 class DeleteFileStepTests: XCTestCase {
-    
     let folderPath = NSTemporaryDirectory() + "DeleteFileTests"
     var path: Path!
     var swiftFilePath: String!
     var objCHeaderPath: String!
     var objCImplPath: String!
     var otherFilePath: String!
-    
+
     override func setUp() {
         super.setUp()
         path = Path(folderPath)
@@ -26,7 +25,7 @@ class DeleteFileStepTests: XCTestCase {
         objCHeaderPath = folderPath + "/AnotherFile.h"
         objCImplPath = folderPath + "/AnotherFile.m"
         otherFilePath = folderPath + "/AnotherFile.txt"
-        
+
         try? FileManager.default.removeItem(at: folderURL)
         try! FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true)
         FileManager.default.createFile(atPath: swiftFilePath, contents: nil)
@@ -34,7 +33,7 @@ class DeleteFileStepTests: XCTestCase {
         FileManager.default.createFile(atPath: objCImplPath, contents: nil)
         FileManager.default.createFile(atPath: otherFilePath, contents: nil)
     }
-    
+
     func testUnusedFilesAreDeleted() {
         let context = StepPipelineContext(verbose: false, extensions: [], path: path)
         context.unusedFiles.append(swiftFilePath)
@@ -50,6 +49,4 @@ class DeleteFileStepTests: XCTestCase {
             XCTFail("Exception should not be thrown.")
         }
     }
-    
 }
-

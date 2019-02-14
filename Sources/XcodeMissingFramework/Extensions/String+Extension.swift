@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    
+
     public var containsXcodeProjExtension: Bool { return self.contains(".xcodeproj") }
     public var containsXcodeWorkspaceExtension: Bool { return self.contains(".xcworkspace") }
     public var containsXcodeAssetsExtension: Bool { return self.contains(".xcassets") }
@@ -21,7 +21,7 @@ extension String {
     public var containsPodfile: Bool { return self.contains("Podfile") }
     public var containsGemfile: Bool { return self.contains("Gemfile") }
     public var containsIdeaExtension: Bool { return self.contains(".idea") }
-    
+
     public var isPodspec: Bool { return self.hasSuffix(".podspec") }
     public var isGitignore: Bool { return self.hasSuffix(".gitignore") }
     public var isDSStore: Bool { return self.hasSuffix(".DS_Store") }

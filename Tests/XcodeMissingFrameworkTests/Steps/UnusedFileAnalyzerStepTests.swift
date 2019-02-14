@@ -5,12 +5,11 @@
 //  Created by Jeff Lett on 2/13/19.
 //
 
-import XCTest
-@testable import XcodeMissingFramework
 import PathKit
+@testable import XcodeMissingFramework
+import XCTest
 
 class UnusedFileAnalyzerStepTests: XCTestCase {
-    
     func testUnusedFilesAreFound() {
         let context = StepPipelineContext(verbose: true, extensions: [], path: Path("ddasl"))
         context.files["used"] = 1
