@@ -9,15 +9,11 @@ import Foundation
 import PathKit
 
 struct DeleteFileStep: Step {
-    func run(context: StepPipelineContext) {
+    func run(context: StepPipelineContext) throws {
         for unusedFile in context.unusedFiles {
             let path = Path(unusedFile)
-            do {
-                print("Deleting File: \(unusedFile)")
-                try path.delete()
-            } catch {
-                print("Error Deleting File: \(error)")
-            }
+            print("Deleting File: \(unusedFile)")
+            try path.delete()
         }
     }
 }
