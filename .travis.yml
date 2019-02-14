@@ -1,0 +1,17 @@
+install: true
+git:
+  submodules: false
+cache:
+  directories:
+    - .build/checkouts # SwiftPM
+    - .build/repositories # SwiftPM
+branches:
+  only:
+    - master
+matrix:
+  include:
+    - os: osx
+      language: objective-c
+      osx_image: xcode10.2
+      script:
+        - swift test
