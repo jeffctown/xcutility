@@ -17,4 +17,5 @@ matrix:
       language: objective-c
       osx_image: xcode10.2
       script:
+        - swiftlint version
         - swiftlint

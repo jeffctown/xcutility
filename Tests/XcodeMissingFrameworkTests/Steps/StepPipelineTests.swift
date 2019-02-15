@@ -8,14 +8,16 @@
 @testable import XcodeMissingFramework
 import XCTest
 
+// swiftlint:disable implicitly_unwrapped_optional
 class StepPipelineTests: XCTestCase {
     var step: MockStep!
     var options = Options(path: "", extensions: [], verbose: true)
 
     class MockStep: Step {
         var numRuns = 0
+
         func run(context: StepPipelineContext) throws {
-            numRuns = numRuns + 1
+            numRuns += 1
         }
     }
 
@@ -42,7 +44,7 @@ class StepPipelineTests: XCTestCase {
         case .success:
             XCTAssert(true)
         case .failure:
-            XCTFail()
+            XCTFail("Should not fail.")
         }
     }
 
@@ -54,7 +56,7 @@ class StepPipelineTests: XCTestCase {
         case .success:
             XCTAssert(true)
         case .failure:
-            XCTFail()
+            XCTFail("Should not fail.")
         }
     }
 
@@ -64,7 +66,7 @@ class StepPipelineTests: XCTestCase {
         let result = pipeline.run()
         switch result {
         case .success:
-            XCTFail()
+            XCTFail("Should not succeed.")
         case .failure:
             XCTAssert(true)
         }

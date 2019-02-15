@@ -10,20 +10,24 @@ import PathKit
 import XCTest
 
 class XcodeReferenceGatherStepTests: XCTestCase {
-    let simpleProjectPathString = "/" + #file.split(separator: "/").dropLast(2).joined(separator: "/").appending("/Fixtures/SimpleProject/")
-    let invalidProjectPathString = "/" + #file.split(separator: "/").dropLast(2).joined(separator: "/").appending("/Fixtures/InvalidProject/")
-    var simpleProjectPath: Path!
-    var invalidProjectPath: Path!
+    static let fileFolder = #file.split(separator: "/").dropLast(2).joined(separator: "/")
+    static let simpleProjectPathString = "/" + fileFolder.appending("/Fixtures/SimpleProject/")
+    static let invalidProjectPathString = "/" + fileFolder.appending("/Fixtures/InvalidProject/")
+    static var simpleProjectPath = Path(simpleProjectPathString)
+    static var invalidProjectPath = Path(invalidProjectPathString)
 
     override func setUp() {
         super.setUp()
-        simpleProjectPath = Path(simpleProjectPathString)
-        invalidProjectPath = Path(invalidProjectPathString)
     }
 
     func testAllReferencesAreGatheredFromSimpleProject() {
-        let testPaths = [simpleProjectPathString + "SimpleProject/AppDelegate.swift", simpleProjectPathString + "SimpleProject/ViewController.swift", simpleProjectPathString + "SimpleProject/Info.plist"]
-        let context = StepPipelineContext(verbose: true, extensions: [], path: simpleProjectPath)
+        let testPaths = [
+            XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/AppDelegate.swift",
+            XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/ViewController.swift",
+            XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/Info.plist"
+        ]
+        let path = XcodeReferenceGatherStepTests.simpleProjectPath
+        let context = StepPipelineContext(verbose: true, extensions: [], path: path)
         let xcodeRefStep = XcodeReferenceGatherStep()
         for testPath in testPaths {
             context.files[testPath] = 0
@@ -36,7 +40,7 @@ class XcodeReferenceGatherStepTests: XCTestCase {
                 XCTAssertEqual(context.files[testPath], 1)
             }
         } catch {
-            XCTFail()
+            XCTFail("No Exception Expected.")
         }
     }
 
@@ -46,7 +50,7 @@ class XcodeReferenceGatherStepTests: XCTestCase {
         let context = StepPipelineContext(verbose: false, extensions: [], path: path)
         do {
             try xcodeRefStep.run(context: context)
-            XCTFail()
+            XCTFail("Exception Expected.")
         } catch {
             XCTAssert(true)
         }

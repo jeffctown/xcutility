@@ -9,6 +9,7 @@ import PathKit
 @testable import XcodeMissingFramework
 import XCTest
 
+// swiftlint:disable implicitly_unwrapped_optional force_try
 class DeleteFileStepTests: XCTestCase {
     let folderPath = NSTemporaryDirectory() + "DeleteFileTests"
     var path: Path!
