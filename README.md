@@ -12,7 +12,7 @@ xcodemissing is a tool to find and delete files missing from your Xcode project.
 
 ### Using a pre-built package:
 
-You can also install XcodeMissing by downloading `XcodeMissing.pkg` from the
+You can install XcodeMissing by downloading `XcodeMissing.pkg` from the
 [latest GitHub release](https://github.com/jeffctown/xcodemissing/releases/latest) and
 running it.
 
