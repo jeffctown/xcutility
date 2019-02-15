@@ -6,21 +6,18 @@ cache:
 branches:
   only:
     - master
-    - develop
 matrix:
   include:
-    - os: osx
+    - name: "Swift Test"
+      os: osx
       language: objective-c
       osx_image: xcode10.2
       script:
         - swift test
-    - os: osx
-      language: objective-c
-      osx_image: xcode10.2
-      script:
-        - swiftlint version
-        - swiftlint
-    - os: osx
+      env:
+        - JOB=CI_UNIT_TEST
+    - name: "Generate Xocde Coverage"
+      os: osx
       language: objective-c
       osx_image: xcode10.2
       script:
@@ -28,3 +25,14 @@ matrix:
         - xcodebuild -scheme xcodemissing -enableCodeCoverage YES build test -quiet
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+      env:
+        - JOB=CI_CODE_COVERAGE
+    - name: "Swiftlint"
+      os: osx
+      language: objective-c
+      osx_image: xcode10.2
+      script:
+        - swiftlint version
+        - swiftlint
+      env:
+        - JOB=CI_SWIFTLINT
