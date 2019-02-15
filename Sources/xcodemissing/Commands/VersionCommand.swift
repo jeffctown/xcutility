@@ -1,6 +1,6 @@
 //
 //  VersionCommand.swift
-//  XcodeMissingFramework
+//  xcodemissing
 //
 //  Created by Jeff Lett on 2/15/19.
 //

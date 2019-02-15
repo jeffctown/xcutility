@@ -1,6 +1,6 @@
 // swiftlint:disable:this file_name
 //  StringExtensionTests.swift
-//  xcodemissingTests
+//  XcodeMissingFrameworkTests
 //
 //  Created by Jeff Lett on 2/12/19.
 //
