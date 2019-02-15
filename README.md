@@ -23,7 +23,8 @@ You can also build from source by cloning this project and running
 
 ## Usage
 
-### Command Line
+
+### Help
 
 ```
 $ xcodemissing help
@@ -35,54 +36,81 @@ Available commands:
    version   Display the current version of xcodemissing
 ```
 
-#### Find Or Delete Files Missing from Xcode in the Current Directory
+### Find
+
+
+#### Find Files Missing from Xcode in the Current Directory
 
 ```bash
 xcodemissing find
 ```
 
-```bash
-xcodemissing delete
-```
-
-#### Find or Delete Files In a Specific Path
+#### Find Files In a Specific Path
 
 ```bash
 xcodemissing find --path ~/MySweetSweetApp/
 ```
 
-```bash
-xcodemissing delete --path ~/MySweetSweetApp/
-```
-
-#### Find or Delete Only Files With a Certain Extension
+#### Find Only Files With a Certain Extension
 
 ```bash
 xcodemissing find --extensions .swift
 ```
 
-```bash
-xcodemissing delete --extensions .swift
-```
-
-#### Find or Delete Only Files With Multiple Extensions
+#### Find Only Files With Multiple Extensions
 
 ```bash
 xcodemissing find --extensions .swift,.h,.m
 ```
 
-```bash
-xcodemissing delete --extensions .swift,.h,.m
-```
-
-#### Find or Delete Verbosely
+#### Find Verbosely
 
 ```bash
 xcodemissing find --verbose
 ```
 
+### Find Combined Usage
+
+```bash
+xcodemissing find --path ~/MySweetSweetApp/ --extension .swift,.h,.m --verbose
+```
+
+### Delete
+
+#### Delete Files Missing from Xcode in the Current Directory
+
+```bash
+xcodemissing delete
+```
+
+#### Delete Files In a Specific Path
+
+```bash
+xcodemissing delete --path ~/MySweetSweetApp/
+```
+
+#### Delete Only Files With a Certain Extension
+
+```bash
+xcodemissing delete --extensions .swift
+```
+
+#### Delete Only Files With Multiple Extensions
+
+```bash
+xcodemissing delete --extensions .swift,.h,.m
+```
+
+#### Delete Verbosely
+
 ```bash
 xcodemissing delete --verbose
+```
+
+### Delete Combined Usage
+
+```bash
+xcodemissing delete --path ~/MySweetSweetApp/ --extension .swift,.h,.m --verbose
 ```
 
 ## License
