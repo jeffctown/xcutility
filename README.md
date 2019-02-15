@@ -21,6 +21,70 @@ running it.
 You can also build from source by cloning this project and running
 `make install` (Xcode 10.2 or later).
 
+## Usage
+
+### Command Line
+
+```
+$ xcodemissing help
+Available commands:
+
+   delete    Delete files that are not referenced in any Xcode projects
+   find      Find files that are not referenced in any Xcode projects
+   help      Display general or command-specific help
+   version   Display the current version of xcodemissing
+```
+
+#### Find Or Delete Files Missing from Xcode in the Current Directory
+
+```bash
+xcodemissing find
+```
+
+```bash
+xcodemissing delete
+```
+
+#### Find or Delete Files In a Specific Path
+
+```bash
+xcodemissing find --path ~/MySweetSweetApp/
+```
+
+```bash
+xcodemissing delete --path ~/MySweetSweetApp/
+```
+
+#### Find or Delete Only Files With a Certain Extension
+
+```bash
+xcodemissing find --extensions .swift
+```
+
+```bash
+xcodemissing delete --extensions .swift
+```
+
+#### Find or Delete Only Files With Multiple Extensions
+
+```bash
+xcodemissing find --extensions .swift,.h,.m
+```
+
+```bash
+xcodemissing delete --extensions .swift,.h,.m
+```
+
+#### Find or Delete Verbosely
+
+```bash
+xcodemissing find --verbose
+```
+
+```bash
+xcodemissing delete --verbose
+```
+
 ## License
 
 xcodemissing is released under the [MIT license](LICENSE.md).
