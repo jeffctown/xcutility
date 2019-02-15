@@ -6,7 +6,6 @@ cache:
 branches:
   only:
     - master
-    - develop
 matrix:
   include:
     - name: "Swift Test"
