@@ -3,9 +3,6 @@ cache:
   directories:
     - .build/checkouts # SwiftPM
     - .build/repositories # SwiftPM
-branches:
-  only:
-    - master
 matrix:
   include:
     - os: osx
