@@ -1,9 +1,9 @@
 import Commandant
-import XcodeMissingFramework
 
 let registry = CommandRegistry<CommandantError<()>>()
 registry.register(DeleteCommand())
 registry.register(FindCommand())
+registry.register(VersionCommand())
 
 let helpCommand = HelpCommand(registry: registry)
 registry.register(helpCommand)

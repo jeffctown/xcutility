@@ -1,6 +1,6 @@
 // swiftlint:disable:this file_name
 //  PathExtensionTests.swift
-//  xcodemissingTests
+//  XcodeMissingFrameworkTests
 //
 //  Created by Jeff Lett on 2/12/19.
 //
@@ -30,7 +30,7 @@ final class PathExtensionsTests: XCTestCase {
     }
 
     func testThatInvalidPathsAreInvalid() {
-        let context = StepPipelineContext(verbose: false, extensions: [], path: Path(""))
+        let context = StepPipelineContext(verbose: false, extensions: [], path: "")
         XCTAssertFalse(Path("/Users/user/repo/project.xcodeproj").isStaticallyValid(context: context))
         XCTAssertFalse(Path("/Users/user/repo/project.xcworkspace").isStaticallyValid(context: context))
         XCTAssertFalse(Path("/Users/user/repo/Images.xcassets/image.png").isStaticallyValid(context: context))
@@ -49,14 +49,14 @@ final class PathExtensionsTests: XCTestCase {
     }
 
     func testThatValidExtensionIsWorkingWithNoOption() {
-        let context = StepPipelineContext(verbose: false, extensions: [], path: Path(""))
+        let context = StepPipelineContext(verbose: false, extensions: [], path: "")
         XCTAssert(Path("/Users/user/repo/File.swift").isValidExtension(context: context))
         XCTAssert(Path("/Users/user/repo/File.h").isValidExtension(context: context))
         XCTAssert(Path("/Users/user/repo/File.m").isValidExtension(context: context))
     }
 
     func testThatValidExtensionsIsWorkingWithExtensionsOption() {
-        let context = StepPipelineContext(verbose: false, extensions: [".h", ".m", ".swift"], path: Path(""))
+        let context = StepPipelineContext(verbose: false, extensions: [".h", ".m", ".swift"], path: "")
         XCTAssert(Path("/Users/user/repo/File.swift").isValidExtension(context: context))
         XCTAssert(Path("/Users/user/repo/File.h").isValidExtension(context: context))
         XCTAssert(Path("/Users/user/repo/File.m").isValidExtension(context: context))

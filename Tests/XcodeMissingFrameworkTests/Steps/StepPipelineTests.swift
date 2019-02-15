@@ -11,7 +11,7 @@ import XCTest
 // swiftlint:disable implicitly_unwrapped_optional
 class StepPipelineTests: XCTestCase {
     var step: MockStep!
-    var options = Options(path: "", extensions: [], verbose: true)
+    var context = StepPipelineContext(verbose: true, extensions: [], path: "")
 
     class MockStep: Step {
         var numRuns = 0
@@ -37,37 +37,32 @@ class StepPipelineTests: XCTestCase {
     }
 
     func testRunIsCalledOnStep() {
-        let pipeline = StepPipeline(steps: [step], options: options)
-        let result = pipeline.run()
-        XCTAssertEqual(step.numRuns, 1)
-        switch result {
-        case .success:
-            XCTAssert(true)
-        case .failure:
-            XCTFail("Should not fail.")
+        let pipeline = StepPipeline(steps: [step], context: context)
+        do {
+            try pipeline.run()
+            XCTAssertEqual(step.numRuns, 1)
+        } catch {
+            XCTFail("Should not throw.")
         }
     }
 
     func testRunIsCalledMultipleTimes() {
-        let pipeline = StepPipeline(steps: [step, step, step], options: options)
-        let result = pipeline.run()
-        XCTAssertEqual(step.numRuns, 3)
-        switch result {
-        case .success:
-            XCTAssert(true)
-        case .failure:
-            XCTFail("Should not fail.")
+        let pipeline = StepPipeline(steps: [step, step, step], context: context)
+        do {
+            try pipeline.run()
+            XCTAssertEqual(step.numRuns, 3)
+        } catch {
+            XCTFail("Should not throw.")
         }
     }
 
     func testFailureIsReturnedOnAnException() {
         let step = MockThrowingStep()
-        let pipeline = StepPipeline(steps: [step], options: options)
-        let result = pipeline.run()
-        switch result {
-        case .success:
+        let pipeline = StepPipeline(steps: [step], context: context)
+        do {
+            try pipeline.run()
             XCTFail("Should not succeed.")
-        case .failure:
+        } catch {
             XCTAssert(true)
         }
     }

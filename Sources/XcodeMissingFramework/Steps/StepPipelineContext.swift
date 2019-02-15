@@ -1,6 +1,6 @@
 //
 //  StepPipelineContext.swift
-//  xcodemissing
+//  XcodeMissingFramework
 //
 //  Created by Jeff Lett on 2/12/19.
 //
@@ -17,9 +17,9 @@ public class StepPipelineContext {
     var xcodeProjects = [XcodeProj]()
     var unusedFiles = [String]()
 
-    public init(verbose: Bool, extensions: [String], path: Path) {
+    public init(verbose: Bool, extensions: [String], path: String) {
         self.verbose = verbose
         self.extensions = extensions
-        self.path = path
+        self.path = Path(path).absolute().normalize()
     }
 }

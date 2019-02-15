@@ -5,7 +5,6 @@
 //  Created by Jeff Lett on 2/13/19.
 //
 
-import PathKit
 @testable import XcodeMissingFramework
 import XCTest
 
@@ -13,8 +12,6 @@ class XcodeReferenceGatherStepTests: XCTestCase {
     static let fileFolder = #file.split(separator: "/").dropLast(2).joined(separator: "/")
     static let simpleProjectPathString = "/" + fileFolder.appending("/Fixtures/SimpleProject/")
     static let invalidProjectPathString = "/" + fileFolder.appending("/Fixtures/InvalidProject/")
-    static var simpleProjectPath = Path(simpleProjectPathString)
-    static var invalidProjectPath = Path(invalidProjectPathString)
 
     override func setUp() {
         super.setUp()
@@ -26,7 +23,7 @@ class XcodeReferenceGatherStepTests: XCTestCase {
             XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/ViewController.swift",
             XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/Info.plist"
         ]
-        let path = XcodeReferenceGatherStepTests.simpleProjectPath
+        let path = XcodeReferenceGatherStepTests.simpleProjectPathString
         let context = StepPipelineContext(verbose: true, extensions: [], path: path)
         let xcodeRefStep = XcodeReferenceGatherStep()
         for testPath in testPaths {
@@ -45,9 +42,8 @@ class XcodeReferenceGatherStepTests: XCTestCase {
     }
 
     func testExceptionIsThrownWhenGivenABadPath() {
-        let path = Path("ksjdhf")
         let xcodeRefStep = XcodeReferenceGatherStep()
-        let context = StepPipelineContext(verbose: false, extensions: [], path: path)
+        let context = StepPipelineContext(verbose: false, extensions: [], path: "ksjdhf")
         do {
             try xcodeRefStep.run(context: context)
             XCTFail("Exception Expected.")

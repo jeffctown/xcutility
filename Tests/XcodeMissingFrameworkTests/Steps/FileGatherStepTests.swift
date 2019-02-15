@@ -5,19 +5,15 @@
 //  Created by Jeff Lett on 2/13/19.
 //
 
-import Foundation
-import PathKit
 @testable import XcodeMissingFramework
 import XCTest
 
-// swiftlint:disable implicitly_unwrapped_optional force_try
+// swiftlint:disable force_try
 final class FileGatherStepTests: XCTestCase {
     let folderPath = NSTemporaryDirectory() + "FileGatherTests"
-    var path: Path!
 
     override func setUp() {
         super.setUp()
-        path = Path(folderPath)
         let folderURL = URL(fileURLWithPath: folderPath)
 
         try? FileManager.default.removeItem(at: folderURL)
@@ -29,8 +25,7 @@ final class FileGatherStepTests: XCTestCase {
     }
 
     func testExceptionIsThrownWithBadPath() {
-        let path = Path("khadsdhh")
-        let context = StepPipelineContext(verbose: false, extensions: [], path: path)
+        let context = StepPipelineContext(verbose: false, extensions: [], path: "khadsdhh")
         do {
             try FileGatherStep().run(context: context)
             XCTFail("Exception should be thrown for a bad path.")
@@ -40,7 +35,7 @@ final class FileGatherStepTests: XCTestCase {
     }
 
     func testAllFilesAreGatheredWithNoExtensions() {
-        let context = StepPipelineContext(verbose: false, extensions: [], path: path)
+        let context = StepPipelineContext(verbose: false, extensions: [], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
             XCTAssertEqual(context.files.keys.count, 4)
@@ -50,7 +45,7 @@ final class FileGatherStepTests: XCTestCase {
     }
 
     func testAllFilesAreGatheredWhenVerbose() {
-        let context = StepPipelineContext(verbose: true, extensions: [], path: path)
+        let context = StepPipelineContext(verbose: true, extensions: [], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
             XCTAssertEqual(context.files.keys.count, 4)
@@ -63,7 +58,7 @@ final class FileGatherStepTests: XCTestCase {
     }
 
     func testAllFilesAreGatheredWhenOneExtensionIsUsed() {
-        let context = StepPipelineContext(verbose: false, extensions: [".swift"], path: path)
+        let context = StepPipelineContext(verbose: false, extensions: [".swift"], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
             XCTAssertEqual(context.files.keys.count, 1)
@@ -76,7 +71,7 @@ final class FileGatherStepTests: XCTestCase {
     }
 
     func testAllFilesAreGatheredWhenMultipleExtensionsAreUsed() {
-        let context = StepPipelineContext(verbose: false, extensions: [".swift", ".h", ".m"], path: path)
+        let context = StepPipelineContext(verbose: false, extensions: [".swift", ".h", ".m"], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
             XCTAssertEqual(context.files.keys.count, 3)

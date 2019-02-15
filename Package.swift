@@ -23,7 +23,7 @@ let package = Package(
             dependencies: ["XcodeMissingFramework","Commandant"]),
         .target(
             name: "XcodeMissingFramework",
-            dependencies: ["xcodeproj", "Commandant"]),
+            dependencies: ["xcodeproj"]),
         .testTarget(
             name: "XcodeMissingFrameworkTests",
             dependencies: ["XcodeMissingFramework"]),
