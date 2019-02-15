@@ -15,14 +15,14 @@ ZSH_COMMAND := ZDOTDIR='/var/empty' zsh -o NO_GLOBAL_RCS -c
 RM_SAFELY := $(ZSH_COMMAND) '[[ ! $${1:?} =~ "^[[:space:]]+\$$" ]] && [[ $${1:A} != "/" ]] && [[ $${\#} == "1" ]] && noglob rm -rf $${1:A}' --
 
 VERSION_STRING=$(shell git describe --abbrev=0 --tags)
-DISTRIBUTION_PLIST=Source/xcodemissing/Distribution.plist
+DISTRIBUTION_PLIST=Sources/xcodemissing/Distribution.plist
 
 RM=rm -f
 MKDIR=mkdir -p
 SUDO=sudo
 CP=cp
 
-.PHONY: all clean install package test uninstall xcconfig xcodeproj
+.PHONY: all clean test installables package install uninstall 
 
 all: installables
 
@@ -56,6 +56,3 @@ install: installables
 
 uninstall:
 	$(RM) "$(BINARIES_FOLDER)/xcodemissing"
-
-xcodeproj:
-	 swift package generate-xcodeproj

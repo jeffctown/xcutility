@@ -9,9 +9,11 @@ import Foundation
 import PathKit
 import xcodeproj
 
-struct XcodeReferenceGatherStep: Step {
+public struct XcodeReferenceGatherStep: Step {
+    
+    public init() {}
 
-    func run(context: StepPipelineContext) throws {
+    public func run(context: StepPipelineContext) throws {
         let xcodeProjectPaths = try context.path.recursiveFilter { $0.isXcodeProject }
         for xcodeProjectPath in xcodeProjectPaths {
             do {

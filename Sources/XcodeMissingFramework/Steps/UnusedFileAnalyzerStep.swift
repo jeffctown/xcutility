@@ -8,8 +8,11 @@
 import Foundation
 import PathKit
 
-struct UnusedFileAnalyzerStep: Step {
-    func run(context: StepPipelineContext) {
+public struct UnusedFileAnalyzerStep: Step {
+    
+    public init() {}
+    
+    public func run(context: StepPipelineContext) {
         context.unusedFiles = context.files.keys.filter { context.files[$0] == 0 }.sorted()
         for unusedFile in context.unusedFiles {
             print("\(unusedFile)")

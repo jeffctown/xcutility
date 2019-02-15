@@ -5,14 +5,12 @@
 //  Created by Jeff Lett on 2/13/19.
 //
 
-import PathKit
 @testable import XcodeMissingFramework
 import XCTest
 
 // swiftlint:disable implicitly_unwrapped_optional force_try
 class DeleteFileStepTests: XCTestCase {
     let folderPath = NSTemporaryDirectory() + "DeleteFileTests"
-    var path: Path!
     var swiftFilePath: String!
     var objCHeaderPath: String!
     var objCImplPath: String!
@@ -20,7 +18,6 @@ class DeleteFileStepTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        path = Path(folderPath)
         let folderURL = URL(fileURLWithPath: folderPath)
         swiftFilePath = folderPath + "/File.swift"
         objCHeaderPath = folderPath + "/AnotherFile.h"
@@ -36,7 +33,7 @@ class DeleteFileStepTests: XCTestCase {
     }
 
     func testUnusedFilesAreDeleted() {
-        let context = StepPipelineContext(verbose: false, extensions: [], path: path)
+        let context = StepPipelineContext(verbose: false, extensions: [], path: folderPath)
         context.unusedFiles.append(swiftFilePath)
         context.unusedFiles.append(objCHeaderPath)
         context.unusedFiles.append(objCImplPath)

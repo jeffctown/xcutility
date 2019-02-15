@@ -7,36 +7,28 @@
 
 import Foundation
 import xcodeproj
-import Commandant
-import Result
 import PathKit
 
-protocol Step {
+public protocol Step {
     func run(context: StepPipelineContext) throws
 }
 
-struct StepPipeline {
+public struct StepPipeline {
 
     let steps: [Step]
     let context: StepPipelineContext
 
-    init(steps: [Step], options: Options) {
+    public init(steps: [Step], context: StepPipelineContext) {
         self.steps = steps
-        let path = Path(options.path).normalize().absolute()
-        self.context = StepPipelineContext(verbose: options.verbose, extensions: options.extensions, path: path)
+        self.context = context
         if context.verbose {
             print("Verbose Logging Enabled.")
         }
     }
 
-    func run() -> Result<(), CommandantError<()>> {
-        do {
-            for step in steps {
-                try step.run(context: context)
-            }
-        } catch {
-            return .failure(.usageError(description: error.localizedDescription))
+    public func run() throws {
+        for step in steps {
+            try step.run(context: context)
         }
-        return .success(())
     }
 }
