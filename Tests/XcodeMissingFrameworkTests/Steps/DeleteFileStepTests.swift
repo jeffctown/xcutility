@@ -34,9 +34,9 @@ class DeleteFileStepTests: XCTestCase {
 
     func testUnusedFilesAreDeleted() {
         let context = StepPipelineContext(verbose: false, extensions: [], path: folderPath)
-        context.unusedFiles.append(swiftFilePath)
-        context.unusedFiles.append(objCHeaderPath)
-        context.unusedFiles.append(objCImplPath)
+        context.unusedFiles.add(File(filename: swiftFilePath))
+        context.unusedFiles.add(File(filename: objCHeaderPath))
+        context.unusedFiles.add(File(filename: objCImplPath))
         do {
             try DeleteFileStep().run(context: context)
             XCTAssertFalse(FileManager.default.fileExists(atPath: swiftFilePath))

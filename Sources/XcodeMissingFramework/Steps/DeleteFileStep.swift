@@ -13,8 +13,8 @@ public struct DeleteFileStep: Step {
     public init() {}
     
     public func run(context: StepPipelineContext) throws {
-        for unusedFile in context.unusedFiles {
-            let path = Path(unusedFile)
+        for unusedFile in context.unusedFiles.all {
+            let path = Path(unusedFile.filename)
             print("Deleting File: \(unusedFile)")
             try path.delete()
         }

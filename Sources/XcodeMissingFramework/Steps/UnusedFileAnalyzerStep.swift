@@ -13,10 +13,10 @@ public struct UnusedFileAnalyzerStep: Step {
     public init() {}
     
     public func run(context: StepPipelineContext) {
-        context.unusedFiles = context.files.keys.filter { context.files[$0] == 0 }.sorted()
-        for unusedFile in context.unusedFiles {
-            print("\(unusedFile)")
+        context.unusedFiles = Files(array: context.files.all.filter { !$0.isUsed } )
+        for unusedFile in context.unusedFiles.all.sorted() {
+            print("\(unusedFile.filename)")
         }
-        print("Total Unused Paths Found: \(context.unusedFiles.count)")
+        print("Total Unused Paths Found: \(context.unusedFiles.all.count)")
     }
 }

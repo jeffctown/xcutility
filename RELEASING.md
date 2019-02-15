@@ -24,8 +24,6 @@ If the changes in this release are breaking, then increment the minor number (`0
 
 The version number needs to be set in the `Version` struct.
 
-This commit can be made directly to `master` and then pushed to GitHub.
-
 ## 3. Create Draft Release
 Create a [new release](https://github.com/jeffctown/xcodemissing/releases/new) on GitHub. The tag version should always be 3 numbers (i.e. `0.26.0`, not `0.26`). Check _This is a pre-release_ for now.
 

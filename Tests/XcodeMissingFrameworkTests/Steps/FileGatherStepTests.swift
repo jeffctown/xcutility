@@ -38,7 +38,7 @@ final class FileGatherStepTests: XCTestCase {
         let context = StepPipelineContext(verbose: false, extensions: [], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
-            XCTAssertEqual(context.files.keys.count, 4)
+            XCTAssertEqual(context.files.all.count, 4)
         } catch {
             XCTFail("Should not throw.")
         }
@@ -48,9 +48,9 @@ final class FileGatherStepTests: XCTestCase {
         let context = StepPipelineContext(verbose: true, extensions: [], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
-            XCTAssertEqual(context.files.keys.count, 4)
-            for file in context.files.keys {
-                XCTAssertEqual(context.files[file], 0)
+            XCTAssertEqual(context.files.all.count, 4)
+            for file in context.files.all {
+                XCTAssert(!file.isUsed)
             }
         } catch {
             XCTFail("Should not throw.")
@@ -61,9 +61,9 @@ final class FileGatherStepTests: XCTestCase {
         let context = StepPipelineContext(verbose: false, extensions: [".swift"], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
-            XCTAssertEqual(context.files.keys.count, 1)
-            for file in context.files.keys {
-                XCTAssertEqual(context.files[file], 0)
+            XCTAssertEqual(context.files.all.count, 1)
+            for file in context.files.all {
+                XCTAssert(!file.isUsed)
             }
         } catch {
             XCTFail("Should not throw.")
@@ -74,9 +74,9 @@ final class FileGatherStepTests: XCTestCase {
         let context = StepPipelineContext(verbose: false, extensions: [".swift", ".h", ".m"], path: folderPath)
         do {
             try FileGatherStep().run(context: context)
-            XCTAssertEqual(context.files.keys.count, 3)
-            for file in context.files.keys {
-                XCTAssertEqual(context.files[file], 0)
+            XCTAssertEqual(context.files.all.count, 3)
+            for file in context.files.all {
+                XCTAssert(!file.isUsed)
             }
         } catch {
             XCTFail("Should not throw.")

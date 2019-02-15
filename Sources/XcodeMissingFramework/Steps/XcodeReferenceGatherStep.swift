@@ -29,8 +29,9 @@ public struct XcodeReferenceGatherStep: Step {
                     if context.verbose {
                         print("  Found Xcode File Reference: \(xcodeFile)")
                     }
-                    if let referenceCount = context.files[xcodeFile] {
-                        context.files[xcodeFile] = referenceCount + 1
+                    if var file = context.files.file(for: xcodeFile) {
+                        file.incrementReferenceCount()
+                        context.files.add(file)
                     }
                 }
             } catch {

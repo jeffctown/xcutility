@@ -13,9 +13,9 @@ public class StepPipelineContext {
     let verbose: Bool
     let extensions: [String]
     let path: Path
-    var files = [String: Int]()
+    var files = Files()
     var xcodeProjects = [XcodeProj]()
-    var unusedFiles = [String]()
+    var unusedFiles = Files()
 
     public init(verbose: Bool, extensions: [String], path: String) {
         self.verbose = verbose
