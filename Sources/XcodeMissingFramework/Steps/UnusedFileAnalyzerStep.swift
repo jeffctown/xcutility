@@ -17,4 +17,3 @@ struct UnusedFileAnalyzerStep: Step {
         print("Total Unused Paths Found: \(context.unusedFiles.count)")
     }
 }
-

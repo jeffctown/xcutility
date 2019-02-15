@@ -1,36 +1,34 @@
-//
+// swiftlint:disable:this file_name
 //  PathExtensionTests.swift
 //  xcodemissingTests
 //
 //  Created by Jeff Lett on 2/12/19.
 //
 
-import XCTest
 import PathKit
 import XcodeMissingFramework
+import XCTest
 
 final class PathExtensionsTests: XCTestCase {
-    
     func testThatPathKnowsWhenItIsAnXcodeProject() {
-        
         let xcodeprojPath = Path("/Users/user/repo/project.xcodeproj")
         XCTAssert(xcodeprojPath.isXcodeProject)
-        
+
         let relativeXcodeprojPath = Path("./Sweetapp.xcodeproj")
         XCTAssert(relativeXcodeprojPath.isXcodeProject)
-        
+
         let insideXcodeprojPath = Path("/Users/user/repo/project.xcodeproj/project.pbxproj")
         XCTAssertFalse(insideXcodeprojPath.isXcodeProject)
     }
-    
+
     func testThatRecursivelyFilterFilters() {
-        let filtered = try? Path(FileManager.default.currentDirectoryPath).recursiveFilter { (path) -> Bool in
-            return false
+        let filtered = try? Path(FileManager.default.currentDirectoryPath).recursiveFilter { _ -> Bool in
+            false
         }
         XCTAssert(filtered != nil)
-        XCTAssert(filtered!.count == 0)
+        XCTAssert(filtered!.isEmpty)
     }
-    
+
     func testThatInvalidPathsAreInvalid() {
         let context = StepPipelineContext(verbose: false, extensions: [], path: Path(""))
         XCTAssertFalse(Path("/Users/user/repo/project.xcodeproj").isStaticallyValid(context: context))
@@ -58,7 +56,7 @@ final class PathExtensionsTests: XCTestCase {
     }
 
     func testThatValidExtensionsIsWorkingWithExtensionsOption() {
-        let context = StepPipelineContext(verbose: false, extensions: [".h",".m",".swift"], path: Path(""))
+        let context = StepPipelineContext(verbose: false, extensions: [".h", ".m", ".swift"], path: Path(""))
         XCTAssert(Path("/Users/user/repo/File.swift").isValidExtension(context: context))
         XCTAssert(Path("/Users/user/repo/File.h").isValidExtension(context: context))
         XCTAssert(Path("/Users/user/repo/File.m").isValidExtension(context: context))
@@ -66,5 +64,4 @@ final class PathExtensionsTests: XCTestCase {
         XCTAssertFalse(Path("/Users/user/repo/File.m.swif").isValidExtension(context: context))
         XCTAssertFalse(Path("/Users/user/repo/File.md").isValidExtension(context: context))
     }
-
 }

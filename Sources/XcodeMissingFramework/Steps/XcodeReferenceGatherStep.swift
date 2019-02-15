@@ -10,7 +10,7 @@ import PathKit
 import xcodeproj
 
 struct XcodeReferenceGatherStep: Step {
-    
+
     func run(context: StepPipelineContext) throws {
         let xcodeProjectPaths = try context.path.recursiveFilter { $0.isXcodeProject }
         for xcodeProjectPath in xcodeProjectPaths {

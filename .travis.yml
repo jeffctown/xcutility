@@ -13,3 +13,9 @@ matrix:
       osx_image: xcode10.2
       script:
         - swift test
+    - os: osx
+      language: objective-c
+      osx_image: xcode10.2
+      script:
+        - swiftlint version
+        - swiftlint

@@ -5,55 +5,57 @@
 //  Created by Jeff Lett on 2/13/19.
 //
 
-import XCTest
-@testable import XcodeMissingFramework
 import PathKit
+@testable import XcodeMissingFramework
+import XCTest
 
 class XcodeReferenceGatherStepTests: XCTestCase {
-    
-    let simpleProjectPathString = "/" + #file.split(separator: "/").dropLast(2).joined(separator: "/").appending("/Fixtures/SimpleProject/")
-    let invalidProjectPathString = "/" + #file.split(separator: "/").dropLast(2).joined(separator: "/").appending("/Fixtures/InvalidProject/")
-    var simpleProjectPath: Path!
-    var invalidProjectPath: Path!
-    
+    static let fileFolder = #file.split(separator: "/").dropLast(2).joined(separator: "/")
+    static let simpleProjectPathString = "/" + fileFolder.appending("/Fixtures/SimpleProject/")
+    static let invalidProjectPathString = "/" + fileFolder.appending("/Fixtures/InvalidProject/")
+    static var simpleProjectPath = Path(simpleProjectPathString)
+    static var invalidProjectPath = Path(invalidProjectPathString)
+
     override func setUp() {
         super.setUp()
-        simpleProjectPath = Path(simpleProjectPathString)
-        invalidProjectPath = Path(invalidProjectPathString)
     }
-    
+
     func testAllReferencesAreGatheredFromSimpleProject() {
-        
-        let testPaths = [simpleProjectPathString + "SimpleProject/AppDelegate.swift", simpleProjectPathString + "SimpleProject/ViewController.swift", simpleProjectPathString + "SimpleProject/Info.plist"]
-        let context = StepPipelineContext(verbose: true, extensions: [], path: simpleProjectPath)
+        let testPaths = [
+            XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/AppDelegate.swift",
+            XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/ViewController.swift",
+            XcodeReferenceGatherStepTests.simpleProjectPathString + "SimpleProject/Info.plist"
+        ]
+        let path = XcodeReferenceGatherStepTests.simpleProjectPath
+        let context = StepPipelineContext(verbose: true, extensions: [], path: path)
         let xcodeRefStep = XcodeReferenceGatherStep()
         for testPath in testPaths {
             context.files[testPath] = 0
         }
-        
+
         do {
             try xcodeRefStep.run(context: context)
-            XCTAssertEqual(context.xcodeProjects.count,1)
+            XCTAssertEqual(context.xcodeProjects.count, 1)
             for testPath in testPaths {
-                XCTAssertEqual(context.files[testPath],1)
+                XCTAssertEqual(context.files[testPath], 1)
             }
         } catch {
-            XCTFail()
+            XCTFail("No Exception Expected.")
         }
     }
-    
+
     func testExceptionIsThrownWhenGivenABadPath() {
         let path = Path("ksjdhf")
         let xcodeRefStep = XcodeReferenceGatherStep()
         let context = StepPipelineContext(verbose: false, extensions: [], path: path)
         do {
             try xcodeRefStep.run(context: context)
-            XCTFail()
+            XCTFail("Exception Expected.")
         } catch {
             XCTAssert(true)
         }
     }
-    
+
 //    func testNoExceptionIsThrownForInvalidProject() {
 //        let xcodeRefStep = XcodeReferenceGatherStep()
 //        let context = StepPipelineContext(verbose: true, extensions: [], path: invalidProjectPath)
@@ -65,4 +67,3 @@ class XcodeReferenceGatherStepTests: XCTestCase {
 //        }
 //    }
 }
-

@@ -9,7 +9,7 @@ import Foundation
 import PathKit
 
 struct FileGatherStep: Step {
-    
+
     func run(context: StepPipelineContext) throws {
         let files = try context.path.recursiveFilter { $0.isValid(context: context) }
         for file in files {

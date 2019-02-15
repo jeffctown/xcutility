@@ -16,10 +16,10 @@ protocol Step {
 }
 
 struct StepPipeline {
-    
+
     let steps: [Step]
     let context: StepPipelineContext
-    
+
     init(steps: [Step], options: Options) {
         self.steps = steps
         let path = Path(options.path).normalize().absolute()
@@ -28,7 +28,7 @@ struct StepPipeline {
             print("Verbose Logging Enabled.")
         }
     }
-    
+
     func run() -> Result<(), CommandantError<()>> {
         do {
             for step in steps {
