@@ -1,3 +1,4 @@
+
 .DS_Store
 /.build
 /Packages
@@ -5,3 +6,6 @@
 xcshareddata
 xcuserdata
 project.xcworkspace
+/Carthage
+*.pkg
+*.zip
