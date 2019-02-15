@@ -3,9 +3,6 @@ cache:
   directories:
     - .build/checkouts # SwiftPM
     - .build/repositories # SwiftPM
-branches:
-  only:
-    - master
 matrix:
   include:
     - os: osx
@@ -19,3 +16,11 @@ matrix:
       script:
         - swiftlint version
         - swiftlint
+    - os: osx
+      language: objective-c
+      osx_image: xcode10.2
+      script:
+        - swift package generate-xcodeproj
+        - xcodebuild -scheme xcodemissing -enableCodeCoverage YES build test
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
