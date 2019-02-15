@@ -10,13 +10,11 @@ import Commandant
 import Result
 import XcodeMissingFramework
 
-public struct VersionCommand: CommandProtocol {
-    public let verb = "version"
-    public let function = "Display the current version of XcodeMissing"
+struct VersionCommand: CommandProtocol {
+    let verb = "version"
+    let function = "Display the current version of XcodeMissing"
     
-    public init() {}
-    
-    public func run(_ options: NoOptions<CommandantError<()>>) -> Result<(), CommandantError<()>> {
+    func run(_ options: NoOptions<CommandantError<()>>) -> Result<(), CommandantError<()>> {
         print(Version.current.value)
         return .success(())
     }

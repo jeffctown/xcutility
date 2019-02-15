@@ -8,7 +8,7 @@
 @testable import XcodeMissingFramework
 import XCTest
 
-// swiftlint:disable implicitly_unwrapped_optional force_try
+// swiftlint:disable force_try
 final class FileGatherStepTests: XCTestCase {
     let folderPath = NSTemporaryDirectory() + "FileGatherTests"
 

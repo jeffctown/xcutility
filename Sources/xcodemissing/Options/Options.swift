@@ -9,7 +9,7 @@ import Foundation
 import Commandant
 import Result
 
-public struct Options: OptionsProtocol {
+struct Options: OptionsProtocol {
     let path: String
     let extensions: [String]
     let verbose: Bool
@@ -18,7 +18,7 @@ public struct Options: OptionsProtocol {
         return { extensions in { verbose in Options(path: path, extensions: extensions, verbose: verbose) } }
     }
 
-    public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CommandantError<()>>> {
+    static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CommandantError<()>>> {
         return create
             <*> m <| Option(key: "path", defaultValue: FileManager.default.currentDirectoryPath, usage: "the path to search")
             <*> m <| Option(key: "extensions", defaultValue: [], usage: "limit the search to files having specific file extensions")
