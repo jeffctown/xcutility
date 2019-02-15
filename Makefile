@@ -21,7 +21,7 @@ MKDIR=mkdir -p
 SUDO=sudo
 CP=cp
 
-.PHONY: all clean test installables package install uninstall archive
+.PHONY: all clean test installables package install uninstall xcodeproj xcodetest codecoverage archive
 
 all: installables
 
@@ -50,6 +50,15 @@ install: installables
 
 uninstall:
 	$(RM) "$(BINARIES_FOLDER)/xcodemissing"
+
+xcodeproj:
+	swift package generate-xcodeproj
+
+xcodetest: xcodeproj
+	xcodebuild -scheme xcodemissing build test
+
+codecoverage: xcodeproj
+	xcodebuild -scheme xcodemissing -enableCodeCoverage YES build test -quiet
 
 archive:
 	carthage build --no-skip-current --platform mac

@@ -1,7 +1,7 @@
-* xcodemissing install method: [ ] .pkg, [ ] homebrew, [ ] source
+* xcodemissing install method: [ ] .pkg, [ ] source
 * `which xcodemissing`:
-* `xcodemissing version`: 
-* `xcodebuild -version`: 
+* `xcodemissing version`:
+* `xcodebuild -version`:
 
 **xcodemissing Output**
 ```
