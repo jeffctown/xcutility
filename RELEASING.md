@@ -33,7 +33,7 @@ This step will require [Carthage](https://github.com/Carthage/Carthage) to be in
 
 Now that you’ve created the release, do a `git pull`: you need the tag locally when you create the installer.
 
-Run `make package` to create the installer locally. It’s probably a good idea to install it and run `xcodemissing version` to make sure that you’ve picked up the changes.
+Run `make release` to run most of the release process and install the latest version. It’s probably a good idea to run `xcodemissing version` to make sure that you’ve picked up the changes.
 
 ## 5. Publish Release
 Edit the release you created. Add the `XcodeMissing.pkg` and `XcodeMissingFramework.framework.zip` that were created, uncheck _This in a pre-release_, and publish! Congratulations, you’ve published the release! 👏
