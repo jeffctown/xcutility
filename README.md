@@ -1,15 +1,15 @@
 # xcodemissing
 
-[![Swift Version](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://swift.org)
-[![GitHub release](https://img.shields.io/github/release/jeffctown/xcodemissing.svg)](https://github.com/jeffctown/xcodemissing/releases)
-[![Build Status](https://travis-ci.org/jeffctown/xcodemissing.svg?branch=master)](https://travis-ci.org/jeffctown/xcodemissing)	
-[![codecov.io](https://codecov.io/github/jeffctown/xcodemissing/coverage.svg?branch=master)](https://codecov.io/github/jeffctown/xcodemissing?branch=master)
-[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/Carthage/Carthage/master/LICENSE.md) 
+[![Swift Version](https://img.shields.io/badge/Swift-5.0-orange.svg?style=for-the-badge)](https://swift.org)
+[![GitHub release](https://img.shields.io/github/release/jeffctown/xcodemissing.svg?style=for-the-badge)](https://github.com/jeffctown/xcodemissing/releases)
+[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=for-the-badge)](https://raw.githubusercontent.com/jeffctown/xcodemissing/master/LICENSE.md) 
+
+[![Build Status](https://travis-ci.org/jeffctown/xcodemissing.svg?&branch=master)](https://travis-ci.org/jeffctown/xcodemissing)[![codecov.io](https://codecov.io/github/jeffctown/xcodemissing/coverage.svg?branch=master)](https://codecov.io/github/jeffctown/xcodemissing?branch=master)
 
 
 xcodemissing is a tool to find and delete files missing from your Xcode project.  
 
-It looks recursively through a path to generate a list of all Xcode projects and files, and will tell you which files are missing from your Xcode projects.
+It recursively searches through a path to find all of the path's Xcode projects and files, and will tell you which files do not exist in any of your Xcode projects.  It can also filter by file extension to find only specific types of files.
 
 ## Installation
 
@@ -23,6 +23,17 @@ running it.
 
 You can also build from source by cloning this project and running
 `make install` (Xcode 10.2 or later).
+
+## Quick Start
+
+* Find all Swift Files:
+```xcodemissing find --extensions .swift```
+
+* Find all Objective C Files:
+```xcodemissing find --extensions .m,.h```
+
+* Find all Swift & Objective C Files:
+```xcodemissing find --extensions .m,.h,.swift```
 
 ## Usage
 

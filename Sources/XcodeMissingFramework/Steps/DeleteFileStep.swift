@@ -14,7 +14,7 @@ public struct DeleteFileStep: Step {
     public func run(context: StepPipelineContext) throws {
         for unusedFile in context.unusedFiles.all {
             let path = Path(unusedFile.filename)
-            print("Deleting File: \(unusedFile)")
+            print("Deleting File: \(unusedFile.filename)")
             try path.delete()
         }
     }

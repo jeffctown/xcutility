@@ -21,7 +21,7 @@ MKDIR=mkdir -p
 SUDO=sudo
 CP=cp
 
-.PHONY: all clean lint test installables package install uninstall xcodeproj xcodetest codecoverage archive
+.PHONY: all clean lint test installables package install uninstall xcodeproj xcodetest codecoverage archive release
 
 all: installables
 
@@ -66,3 +66,10 @@ codecoverage: xcodeproj
 archive:
 	carthage build --no-skip-current --platform mac
 	carthage archive $(FRAMEWORK_NAME)
+
+release: | lint test xcodetest archive package install
+
+
+
+
+

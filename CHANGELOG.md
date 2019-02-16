@@ -16,6 +16,12 @@
 
 * None.
 
+## 0.1.2 (02/17/2019)
+
+#### Enhancements
+
+* Improved the output from deleting files.
+
 ## 0.1.1 (02/16/2019)
 
 #### Bug Fixes
