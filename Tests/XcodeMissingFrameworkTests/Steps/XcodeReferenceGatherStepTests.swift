@@ -52,14 +52,15 @@ class XcodeReferenceGatherStepTests: XCTestCase {
         }
     }
 
-//    func testNoExceptionIsThrownForInvalidProject() {
-//        let xcodeRefStep = XcodeReferenceGatherStep()
-//        let context = StepPipelineContext(verbose: true, extensions: [], path: invalidProjectPath)
-//        do {
-//            try xcodeRefStep.run(context: context)
-//            XCTAssert(true)
-//        } catch {
-//            XCTFail()
-//        }
-//    }
+    func testNoExceptionIsThrownForInvalidProject() {
+        let xcodeRefStep = XcodeReferenceGatherStep()
+        let path = XcodeReferenceGatherStepTests.invalidProjectPathString
+        let context = StepPipelineContext(verbose: true, extensions: [], path: path)
+        do {
+            try xcodeRefStep.run(context: context)
+            XCTAssert(true)
+        } catch {
+            XCTFail("Should not throw.")
+        }
+    }
 }
