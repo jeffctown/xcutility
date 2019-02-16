@@ -24,7 +24,7 @@ matrix:
         - swift package generate-xcodeproj
         - xcodebuild -scheme xcodemissing -enableCodeCoverage YES build test -quiet
       after_success:
-        - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -s https://codecov.io/bash) -J 'XcodeMissingFramework'
       env:
         - JOB=CI_CODE_COVERAGE
     - name: "Swiftlint"
