@@ -11,11 +11,12 @@ import XCTest
 class UnusedFileAnalyzerStepTests: XCTestCase {
     func testUnusedFilesAreFound() {
         let context = StepPipelineContext(verbose: true, extensions: [], path: "ddasl")
-        context.files["used"] = 1
-        context.files["unused"] = 0
+        context.files.add(File(filename: "used", referenceCount: 1))
+        context.files.add(File(filename: "unused"))
         let unusedFileAnalyzerStep = UnusedFileAnalyzerStep()
         unusedFileAnalyzerStep.run(context: context)
-        XCTAssert(context.unusedFiles.count == 1)
-        XCTAssert(context.unusedFiles[0] == "unused")
+
+        XCTAssertEqual(context.unusedFiles.all.count, 1)
+        XCTAssertEqual(context.unusedFiles.all[0].filename, "unused")
     }
 }

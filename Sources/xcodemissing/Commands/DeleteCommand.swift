@@ -5,8 +5,8 @@
 //  Created by Jeff Lett on 2/11/19.
 //
 
-import Foundation
 import Commandant
+import Foundation
 import Result
 import XcodeMissingFramework
 
@@ -23,7 +23,7 @@ struct DeleteCommand: CommandProtocol {
                 XcodeReferenceGatherStep(),
                 UnusedFileAnalyzerStep(),
                 DeleteFileStep()
-                ], context: context
+            ], context: context
             ).run()
             return .success(())
         } catch {

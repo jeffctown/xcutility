@@ -9,7 +9,7 @@
 import XCTest
 
 class XcodeReferenceGatherStepTests: XCTestCase {
-    static let fileFolder = #file.split(separator: "/").dropLast(2).joined(separator: "/")
+    static let fileFolder = #file.split(separator: "/").dropLast(3).joined(separator: "/")
     static let simpleProjectPathString = "/" + fileFolder.appending("/Fixtures/SimpleProject/")
     static let invalidProjectPathString = "/" + fileFolder.appending("/Fixtures/InvalidProject/")
 
@@ -27,14 +27,14 @@ class XcodeReferenceGatherStepTests: XCTestCase {
         let context = StepPipelineContext(verbose: true, extensions: [], path: path)
         let xcodeRefStep = XcodeReferenceGatherStep()
         for testPath in testPaths {
-            context.files[testPath] = 0
+            context.files.add(File(filename: testPath))
         }
 
         do {
             try xcodeRefStep.run(context: context)
             XCTAssertEqual(context.xcodeProjects.count, 1)
             for testPath in testPaths {
-                XCTAssertEqual(context.files[testPath], 1)
+                XCTAssert(context.files.file(for: testPath)!.isUsed, "\(testPath) must show as referenced by Xcode.")
             }
         } catch {
             XCTFail("No Exception Expected.")
@@ -52,14 +52,15 @@ class XcodeReferenceGatherStepTests: XCTestCase {
         }
     }
 
-//    func testNoExceptionIsThrownForInvalidProject() {
-//        let xcodeRefStep = XcodeReferenceGatherStep()
-//        let context = StepPipelineContext(verbose: true, extensions: [], path: invalidProjectPath)
-//        do {
-//            try xcodeRefStep.run(context: context)
-//            XCTAssert(true)
-//        } catch {
-//            XCTFail()
-//        }
-//    }
+    func testNoExceptionIsThrownForInvalidProject() {
+        let xcodeRefStep = XcodeReferenceGatherStep()
+        let path = XcodeReferenceGatherStepTests.invalidProjectPathString
+        let context = StepPipelineContext(verbose: true, extensions: [], path: path)
+        do {
+            try xcodeRefStep.run(context: context)
+            XCTAssert(true)
+        } catch {
+            XCTFail("Should not throw.")
+        }
+    }
 }
