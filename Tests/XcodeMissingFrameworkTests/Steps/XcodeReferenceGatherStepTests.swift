@@ -11,7 +11,7 @@ import XCTest
 class XcodeReferenceGatherStepTests: XCTestCase {
     static let fileFolder = #file.split(separator: "/").dropLast(3).joined(separator: "/")
     static let simpleProjectPathString = "/" + fileFolder.appending("/Fixtures/SimpleProject/")
-    
+
     override func setUp() {
         super.setUp()
     }
