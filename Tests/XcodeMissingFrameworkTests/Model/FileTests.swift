@@ -6,16 +6,13 @@
 //
 
 import Foundation
-import XCTest
 @testable import XcodeMissingFramework
+import XCTest
 
 class FileTests: XCTestCase {
-    
     func testComparable() {
         let file1 = File(filename: "a")
         let file2 = File(filename: "b")
         XCTAssert(file1 < file2)
     }
 }
-
-

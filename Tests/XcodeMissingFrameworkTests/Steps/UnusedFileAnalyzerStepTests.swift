@@ -15,7 +15,7 @@ class UnusedFileAnalyzerStepTests: XCTestCase {
         context.files.add(File(filename: "unused"))
         let unusedFileAnalyzerStep = UnusedFileAnalyzerStep()
         unusedFileAnalyzerStep.run(context: context)
-        
+
         XCTAssertEqual(context.unusedFiles.all.count, 1)
         XCTAssertEqual(context.unusedFiles.all[0].filename, "unused")
     }

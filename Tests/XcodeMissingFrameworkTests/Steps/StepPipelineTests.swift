@@ -66,7 +66,7 @@ class StepPipelineTests: XCTestCase {
             XCTAssert(true)
         }
     }
-    
+
     func testCaseSensitivityDifferenceBetweenXcodeAndFileSystem() {
         let fileFolder = #file.split(separator: "/").dropLast(2).joined(separator: "/")
         let path = "/" + fileFolder.appending("/Fixtures/CaseSensitivity/")
@@ -80,6 +80,5 @@ class StepPipelineTests: XCTestCase {
         } catch {
             XCTFail("Should not throw.")
         }
-
     }
 }

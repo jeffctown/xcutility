@@ -34,7 +34,7 @@ class XcodeReferenceGatherStepTests: XCTestCase {
             try xcodeRefStep.run(context: context)
             XCTAssertEqual(context.xcodeProjects.count, 1)
             for testPath in testPaths {
-                XCTAssert(context.files.file(for: testPath)!.isUsed,"\(testPath) must show as referenced by Xcode.")
+                XCTAssert(context.files.file(for: testPath)!.isUsed, "\(testPath) must show as referenced by Xcode.")
             }
         } catch {
             XCTFail("No Exception Expected.")
