@@ -9,7 +9,7 @@
 
 xcodemissing is a tool to find and delete files missing from your Xcode project.  
 
-It looks recursively through a path to generate a list of all Xcode projects and files, and will tell you which files are missing from your Xcode projects.
+It recursively searches through a path to find all of the path's Xcode projects and files, and will tell you which files do not exist in any of your Xcode projects.  It can also filter by file extension to find only specific types of files.
 
 ## Installation
 
@@ -23,6 +23,17 @@ running it.
 
 You can also build from source by cloning this project and running
 `make install` (Xcode 10.2 or later).
+
+## Quick Start
+
+* Find all Swift Files:
+```xcodemissing find --extensions .swift```
+
+* Find all Objective C Files:
+```xcodemissing find --extensions .m,.h```
+
+* Find all Swift & Objective C Files:
+```xcodemissing find --extensions .m,.h,.swift```
 
 ## Usage
 
