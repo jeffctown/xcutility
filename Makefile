@@ -21,13 +21,16 @@ MKDIR=mkdir -p
 SUDO=sudo
 CP=cp
 
-.PHONY: all clean test installables package install uninstall xcodeproj xcodetest codecoverage archive
+.PHONY: all clean lint test installables package install uninstall xcodeproj xcodetest codecoverage archive
 
 all: installables
 
 clean:
 	swift package clean
-
+	
+lint:
+	swiftlint --strict 
+	
 test:
 	swift test
 

@@ -13,14 +13,13 @@ matrix:
       language: objective-c
       osx_image: xcode10.2
       script:
-        - swift test
+        - make test
     - name: "Generate Xocde Coverage"
       os: osx
       language: objective-c
       osx_image: xcode10.2
       script:
-        - swift package generate-xcodeproj
-        - xcodebuild -scheme xcodemissing -enableCodeCoverage YES build test -quiet
+        - make xcodetest
       after_success:
         - bash <(curl -s https://codecov.io/bash)
     - name: "Swiftlint"
@@ -28,4 +27,4 @@ matrix:
       language: objective-c
       osx_image: xcode10.2
       script:
-        - swiftlint --strict
+        - make lint
