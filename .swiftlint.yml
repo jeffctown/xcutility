@@ -1,6 +1,8 @@
 included:
-  - Source
+  - Sources
   - Tests
+excluded:
+  - Tests/Fixtures
 
 opt_in_rules:
   - anyobject_protocol
@@ -19,7 +21,6 @@ opt_in_rules:
   - empty_xctest_method
   - explicit_enum_raw_value
   - explicit_init
-  - extension_access_modifier
   - fallthrough
   - fatal_error_message
   - file_header
@@ -36,15 +37,12 @@ opt_in_rules:
   - multiline_arguments
   - multiline_parameters
   - nimble_operator
-  - no_extension_access_modifier
-  - no_grouping_extension
   - number_separator
   - object_literal
   - operator_usage_whitespace
   - overridden_super_call
   - override_in_extension
   - pattern_matching_keywords
-  - prefixed_toplevel_constant
   - private_action
   - private_outlet
   - prohibited_interface_builder

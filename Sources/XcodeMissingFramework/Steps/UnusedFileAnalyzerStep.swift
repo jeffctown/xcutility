@@ -9,9 +9,8 @@ import Foundation
 import PathKit
 
 public struct UnusedFileAnalyzerStep: Step {
-    
     public init() {}
-    
+
     public func run(context: StepPipelineContext) {
         context.unusedFiles = Files(array: context.files.all.filter { !$0.isUsed })
         for unusedFile in context.unusedFiles.all.sorted() {

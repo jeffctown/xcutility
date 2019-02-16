@@ -14,8 +14,6 @@ matrix:
       osx_image: xcode10.2
       script:
         - swift test
-      env:
-        - JOB=CI_UNIT_TEST
     - name: "Generate Xocde Coverage"
       os: osx
       language: objective-c
@@ -24,15 +22,10 @@ matrix:
         - swift package generate-xcodeproj
         - xcodebuild -scheme xcodemissing -enableCodeCoverage YES build test -quiet
       after_success:
-        - bash <(curl -s https://codecov.io/bash) -J 'XcodeMissingFramework'
-      env:
-        - JOB=CI_CODE_COVERAGE
+        - bash <(curl -s https://codecov.io/bash)
     - name: "Swiftlint"
       os: osx
       language: objective-c
       osx_image: xcode10.2
       script:
-        - swiftlint version
-        - swiftlint
-      env:
-        - JOB=CI_SWIFTLINT
+        - swiftlint --strict

@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import xcodeproj
 import PathKit
+import xcodeproj
 
 public class StepPipelineContext {
     let verbose: Bool

@@ -68,7 +68,7 @@ class StepPipelineTests: XCTestCase {
     }
 
     func testCaseSensitivityDifferenceBetweenXcodeAndFileSystem() {
-        let fileFolder = #file.split(separator: "/").dropLast(2).joined(separator: "/")
+        let fileFolder = #file.split(separator: "/").dropLast(3).joined(separator: "/")
         let path = "/" + fileFolder.appending("/Fixtures/CaseSensitivity/")
         let steps: [Step] = [FileGatherStep(), XcodeReferenceGatherStep(), UnusedFileAnalyzerStep()]
         let context = StepPipelineContext(verbose: false, extensions: [".swift"], path: path)

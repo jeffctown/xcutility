@@ -9,7 +9,7 @@
 import XCTest
 
 class XcodeReferenceGatherStepTests: XCTestCase {
-    static let fileFolder = #file.split(separator: "/").dropLast(2).joined(separator: "/")
+    static let fileFolder = #file.split(separator: "/").dropLast(3).joined(separator: "/")
     static let simpleProjectPathString = "/" + fileFolder.appending("/Fixtures/SimpleProject/")
     static let invalidProjectPathString = "/" + fileFolder.appending("/Fixtures/InvalidProject/")
 

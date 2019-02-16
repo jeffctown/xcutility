@@ -8,7 +8,6 @@
 import Foundation
 
 struct File {
-
     let filename: String
     private var refCount: Int
 

@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import xcodeproj
 import PathKit
+import xcodeproj
 
 public protocol Step {
     func run(context: StepPipelineContext) throws
 }
 
 public struct StepPipeline {
-
     let steps: [Step]
     let context: StepPipelineContext
 
