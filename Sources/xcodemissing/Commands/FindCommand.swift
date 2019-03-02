@@ -21,7 +21,7 @@ struct FindCommand: CommandProtocol {
             try StepPipeline(steps: [
                 FileGatherStep(),
                 XcodeReferenceGatherStep(),
-                UnusedFileAnalyzerStep()
+                MissingFileAnalyzerStep()
             ], context: context
             ).run()
             return .success(())

@@ -16,6 +16,7 @@ public class StepPipelineContext {
     var files = Files()
     var xcodeProjects = [XcodeProj]()
     var unusedFiles = Files()
+    var missingFiles = Files()
 
     public init(verbose: Bool, extensions: [String], path: String) {
         self.verbose = verbose

@@ -10,5 +10,5 @@ import Foundation
 public struct Version {
     public let value: String
 
-    public static let current = Version(value: "0.1.2")
+    public static let current = Version(value: "0.2.0")
 }

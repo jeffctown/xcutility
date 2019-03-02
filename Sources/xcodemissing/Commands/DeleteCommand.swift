@@ -21,8 +21,8 @@ struct DeleteCommand: CommandProtocol {
             try StepPipeline(steps: [
                 FileGatherStep(),
                 XcodeReferenceGatherStep(),
-                UnusedFileAnalyzerStep(),
-                DeleteFileStep()
+                MissingFileAnalyzerStep(),
+                DeleteMissingFileStep()
             ], context: context
             ).run()
             return .success(())

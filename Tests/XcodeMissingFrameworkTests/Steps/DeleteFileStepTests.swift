@@ -1,5 +1,5 @@
 //
-//  DeleteFileStepTests.swift
+//  DeleteMissingFileStepTests.swift
 //  XcodeMissingFrameworkTests
 //
 //  Created by Jeff Lett on 2/13/19.
@@ -9,7 +9,7 @@
 import XCTest
 
 // swiftlint:disable implicitly_unwrapped_optional force_try
-class DeleteFileStepTests: XCTestCase {
+class DeleteMissingFileStepTests: XCTestCase {
     let folderPath = NSTemporaryDirectory() + "DeleteFileTests"
     var swiftFilePath: String!
     var objCHeaderPath: String!
@@ -34,11 +34,11 @@ class DeleteFileStepTests: XCTestCase {
 
     func testUnusedFilesAreDeleted() {
         let context = StepPipelineContext(verbose: false, extensions: [], path: folderPath)
-        context.unusedFiles.add(File(filename: swiftFilePath))
-        context.unusedFiles.add(File(filename: objCHeaderPath))
-        context.unusedFiles.add(File(filename: objCImplPath))
+        context.missingFiles.add(File(filename: swiftFilePath))
+        context.missingFiles.add(File(filename: objCHeaderPath))
+        context.missingFiles.add(File(filename: objCImplPath))
         do {
-            try DeleteFileStep().run(context: context)
+            try DeleteMissingFileStep().run(context: context)
             XCTAssertFalse(FileManager.default.fileExists(atPath: swiftFilePath))
             XCTAssertFalse(FileManager.default.fileExists(atPath: objCHeaderPath))
             XCTAssertFalse(FileManager.default.fileExists(atPath: objCImplPath))

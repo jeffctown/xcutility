@@ -70,13 +70,13 @@ class StepPipelineTests: XCTestCase {
     func testCaseSensitivityDifferenceBetweenXcodeAndFileSystem() {
         let fileFolder = #file.split(separator: "/").dropLast(3).joined(separator: "/")
         let path = "/" + fileFolder.appending("/Fixtures/CaseSensitivity/")
-        let steps: [Step] = [FileGatherStep(), XcodeReferenceGatherStep(), UnusedFileAnalyzerStep()]
+        let steps: [Step] = [FileGatherStep(), XcodeReferenceGatherStep(), MissingFileAnalyzerStep()]
         let context = StepPipelineContext(verbose: false, extensions: [".swift"], path: path)
         let pipeline = StepPipeline(steps: steps, context: context)
         do {
             try pipeline.run()
-            print("UnusedFiles: \(context.unusedFiles)")
-            XCTAssert(context.unusedFiles.all.isEmpty)
+            print("UnusedFiles: \(context.missingFiles)")
+            XCTAssert(context.missingFiles.all.isEmpty)
         } catch {
             XCTFail("Should not throw.")
         }
