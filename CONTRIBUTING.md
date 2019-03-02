@@ -4,13 +4,13 @@ All changes, no matter how trivial, must be done via pull request. Commits
 should never be made directly on the `master` branch. Prefer rebasing over
 merging `master` into your PR branch to update it and resolve conflicts.
 
-_If you have commit access to XcodeMissing and believe your change to be trivial
+_If you have commit access to XCUtility and believe your change to be trivial
 and not worth waiting for review, you may open a pull request and merge
 immediately, but this should be the exception, not the norm._
 
 ### Tests
 
-XcodeMissing supports building via Xcode and Swift Package Manager on macOS. When contributing code changes, please
+XCUtility supports building via Xcode and Swift Package Manager on macOS. When contributing code changes, please
 ensure that both supported build methods continue to work and pass tests.
 
 ```shell

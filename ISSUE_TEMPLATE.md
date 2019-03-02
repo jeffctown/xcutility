@@ -1,15 +1,15 @@
-* xcodemissing install method: [ ] .pkg, [ ] source
-* `which xcodemissing`:
-* `xcodemissing version`:
+* xcutility install method: [ ] .pkg, [ ] source
+* `which xcutilty`:
+* `xcutility version`:
 * `xcodebuild -version`:
 
-**xcodemissing Output**
+**xcutilty Output**
 ```
 <OUTPUT>
 ```
 
 **Actual outcome**
-xcodemissing did or did not ...
+xcutilty did or did not ...
 
 **Expected outcome**
-xcodemissing should ...
+xcutilty should ...

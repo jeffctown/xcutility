@@ -1,22 +1,21 @@
-# xcodemissing
+# xcutility
 
 [![Swift Version](https://img.shields.io/badge/Swift-5.0-orange.svg?style=for-the-badge)](https://swift.org)
-[![GitHub release](https://img.shields.io/github/release/jeffctown/xcodemissing.svg?style=for-the-badge)](https://github.com/jeffctown/xcodemissing/releases)
-[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=for-the-badge)](https://raw.githubusercontent.com/jeffctown/xcodemissing/master/LICENSE.md) 
+[![GitHub release](https://img.shields.io/github/release/jeffctown/xcutility.svg?style=for-the-badge)](https://github.com/jeffctown/xcutility/releases)
+[![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=for-the-badge)](https://raw.githubusercontent.com/jeffctown/xcutility/master/LICENSE.md) 
 
-[![Build Status](https://travis-ci.org/jeffctown/xcodemissing.svg?&branch=master)](https://travis-ci.org/jeffctown/xcodemissing)[![codecov.io](https://codecov.io/github/jeffctown/xcodemissing/coverage.svg?branch=master)](https://codecov.io/github/jeffctown/xcodemissing?branch=master)
+[![Build Status](https://travis-ci.org/jeffctown/xcutility.svg?&branch=master)](https://travis-ci.org/jeffctown/xcutility)[![codecov.io](https://codecov.io/github/jeffctown/xcutility/coverage.svg?branch=master)](https://codecov.io/github/jeffctown/xcutility?branch=master)
 
+xcutility is a tool to find and delete unused files from Xcode projects.  
 
-xcodemissing is a tool to find and delete files missing from your Xcode project.  
-
-It recursively searches through a path to find all of the path's Xcode projects and files, and will tell you which files do not exist in any of your Xcode projects.  It can also filter by file extension to find only specific types of files.
+It recursively searches through a path to find all of the path's Xcode projects and files, and will tell you which files are not referenced or built in any of your Xcode projects.  
 
 ## Installation
 
 ### Using a pre-built package:
 
-You can install XcodeMissing by downloading `XcodeMissing.pkg` from the
-[latest GitHub release](https://github.com/jeffctown/xcodemissing/releases/latest) and
+You can install xcutility by downloading `xcutility.pkg` from the
+[latest GitHub release](https://github.com/jeffctown/xcutility/releases/latest) and
 running it.
 
 ### Compiling from source:
@@ -26,14 +25,24 @@ You can also build from source by cloning this project and running
 
 ## Quick Start
 
-* Find all Swift Files:
-```xcodemissing find --extensions .swift```
+* Find Swift files not referenced in any Xcode projects:
+```xcutility norefs --extensions .swift```
 
-* Find all Objective C Files:
-```xcodemissing find --extensions .m,.h```
+* Find Objective C files not referenced in any Xcode projects:
+```xcutility norefs --extensions .m,.h```
 
-* Find all Swift & Objective C Files:
-```xcodemissing find --extensions .m,.h,.swift```
+* Find Swift & Objective C files not referenced in any Xcode projects:
+```xcutility norefs --extensions .m,.h,.swift```
+
+* Find Swift files not compiled in any Xcode projects:
+```xcutility unbuilt --extensions .swift```
+
+* Find Objective C files not compiled in any Xcode projects:
+```xcutility unbuilt --extensions .m```
+
+* Find Swift & Objective C files not compiled in any Xcode projects:
+```xcutility unbuilt --extensions .m,.swift```
+
 
 ## Usage
 
@@ -41,92 +50,107 @@ You can also build from source by cloning this project and running
 ### Help
 
 ```
-$ xcodemissing help
+$ xcutility help
 Available commands:
 
-   delete    Delete files that are not referenced in any Xcode projects
-   find      Find files that are not referenced in any Xcode projects
+   all       Find files that are not built or referenced in any Xcode projects
    help      Display general or command-specific help
-   version   Display the current version of xcodemissing
+   norefs    Find files that are not referenced in any Xcode projects
+   unbuilt   Find files that are referenced in Xcode but not built in any build phases
+   version   Display the current version of xcutility
 ```
 
-### Find
+### Unreferenced Files
 
 
-#### Find Files Missing from Xcode in the Current Directory
+#### Find Files that are Unreferenced by any Xcode Projects in the Current Directory
 
 ```bash
-xcodemissing find
+xcutility norefs
 ```
 
-#### Find Files In a Specific Path
+#### Find Files that are Unreferenced by any Xcode Projects In a Specific Path
 
 ```bash
-xcodemissing find --path ~/MySweetSweetApp/
+xcutility norefs --path ~/MySweetSweetApp/
 ```
 
-#### Find Only Files With a Certain Extension
+#### Find Files With a Certain Extension that are Unreferenced by any Xcode Projects 
 
 ```bash
-xcodemissing find --extensions .swift
+xcutility norefs --extensions .swift
 ```
 
-#### Find Only Files With Multiple Extensions
+#### Find Only Files With Multiple Extensions that are Unreferenced by any Xcode Projects
 
 ```bash
-xcodemissing find --extensions .swift,.h,.m
+xcutility norefs --extensions .swift,.h,.m
 ```
 
-#### Find Verbosely
+#### Find And Delete Files With Multiple Extensions that are Unreferenced by any Xcode Projects
 
 ```bash
-xcodemissing find --verbose
+xcutility norefs --extensions .swift,.h,.m --delete
 ```
 
-### Find Combined Usage
+#### Find Unreferenced Files Verbosely
 
 ```bash
-xcodemissing find --path ~/MySweetSweetApp/ --extension .swift,.h,.m --verbose
+xcutility norefs --verbose
 ```
 
-### Delete
-
-#### Delete Files Missing from Xcode in the Current Directory
+### Find Unreferenced Files Combined Usage
 
 ```bash
-xcodemissing delete
+xcutility norefs --path ~/MySweetSweetApp/ --extension .swift,.h,.m --verbose --delete
 ```
 
-#### Delete Files In a Specific Path
+### Unbuilt Files
+
+
+#### Find Files that are not built by any Xcode Project Build Phases in the Current Directory
 
 ```bash
-xcodemissing delete --path ~/MySweetSweetApp/
+xcutility unbuilt
 ```
 
-#### Delete Only Files With a Certain Extension
+#### Find Files that are not built by any Xcode Project Build Phases in a specific path
 
 ```bash
-xcodemissing delete --extensions .swift
+xcutility unbuilt --path ~/MySweetSweetApp/
 ```
 
-#### Delete Only Files With Multiple Extensions
+#### Find Files With a Certain Extension that are not built by any Xcode Projects Build Phases
 
 ```bash
-xcodemissing delete --extensions .swift,.h,.m
+xcutility unbuilt --extensions .swift
 ```
 
-#### Delete Verbosely
+#### Find Only Files With Multiple Extensions that are not built by any Xcode Projects Build Phases
 
 ```bash
-xcodemissing delete --verbose
+xcutility unbuilt --extensions .swift,.h,.m
 ```
 
-### Delete Combined Usage
+#### Find And Delete Files With Multiple Extensions that are not built by any Xcode Projects Build Phases
 
 ```bash
-xcodemissing delete --path ~/MySweetSweetApp/ --extension .swift,.h,.m --verbose
+xcutility unbuilt --extensions .swift,.m --delete
 ```
+
+#### Find Unbuilt Files Verbosely
+
+```bash
+xcutility unbuilt --verbose
+```
+
+### Find Unbuilt Files Combined Usage
+
+```bash
+xcutility unbuilt --path ~/MySweetSweetApp/ --extension .swift,.m --verbose --delete
+```
+
 
 ## License
 
-xcodemissing is released under the [MIT license](LICENSE.md).
+xcutility is released under the [MIT license](LICENSE.md).

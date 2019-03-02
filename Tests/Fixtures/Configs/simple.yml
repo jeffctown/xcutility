@@ -1,0 +1,15 @@
+excluded:
+- Pods
+- .gitignore
+- Gemfile
+- Podfile
+- Carthage
+- .build
+- .DS_Store
+- .framework
+- .playground
+- .idea/
+- .podspec
+- fastlane
+
+xcodetools_version: 0.2.0
