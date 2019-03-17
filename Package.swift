@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/jpsim/Yams.git", from: "1.0.1")
     ],
     targets: [
-        .target(name: "xcutility", dependencies: ["XCUtilityFramework","Commandant"]),
+        .target(name: "xcutility", dependencies: ["XCUtilityFramework", "Commandant"]),
         .target(name: "XCUtilityFramework", dependencies: ["xcodeproj", "Yams"]),
         .testTarget(name: "XCUtilityFrameworkTests", dependencies: ["XCUtilityFramework"])
     ],
