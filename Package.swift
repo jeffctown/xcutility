@@ -6,14 +6,8 @@ import PackageDescription
 let package = Package(
     name: "xcutility",
     products: [
-        .library(
-            name: "XCUtilityFramework",
-            targets: ["XCUtilityFramework"]
-        ),
-        .executable(
-            name: "xcutility",
-            targets: ["xcutility"]
-        )
+        .library(name: "XCUtilityFramework", targets: ["XCUtilityFramework"]),
+        .executable(name: "xcutility", targets: ["xcutility"])
     ],
     dependencies: [
         .package(url: "https://github.com/tuist/xcodeproj.git", from: "6.5.0"),
@@ -21,18 +15,9 @@ let package = Package(
         .package(url: "https://github.com/jpsim/Yams.git", from: "1.0.1")
     ],
     targets: [
-        .target(
-            name: "xcutility",
-            dependencies: ["XCUtilityFramework","Commandant"]
-        ),
-        .target(
-            name: "XCUtilityFramework",
-            dependencies: ["xcodeproj", "Yams"]
-        ),
-        .testTarget(
-            name: "XCUtilityFrameworkTests",
-            dependencies: ["XCUtilityFramework"]
-        )
+        .target(name: "xcutility", dependencies: ["XCUtilityFramework","Commandant"]),
+        .target(name: "XCUtilityFramework", dependencies: ["xcodeproj", "Yams"]),
+        .testTarget(name: "XCUtilityFrameworkTests", dependencies: ["XCUtilityFramework"])
     ],
     swiftLanguageVersions: [.v5]
 )
