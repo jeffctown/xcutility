@@ -8,10 +8,12 @@ let package = Package(
     products: [
         .library(
             name: "XCUtilityFramework",
-            targets: ["XCUtilityFramework"]),
+            targets: ["XCUtilityFramework"]
+        ),
         .executable(
             name: "xcutility",
-            targets: ["xcutility"])
+            targets: ["xcutility"]
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/tuist/xcodeproj.git", from: "6.5.0"),
@@ -21,13 +23,16 @@ let package = Package(
     targets: [
         .target(
             name: "xcutility",
-            dependencies: ["XCUtilityFramework","Commandant"]),
+            dependencies: ["XCUtilityFramework","Commandant"]
+        ),
         .target(
             name: "XCUtilityFramework",
-            dependencies: ["xcodeproj", "Yams"]),
+            dependencies: ["xcodeproj", "Yams"]
+        ),
         .testTarget(
             name: "XCUtilityFrameworkTests",
-            dependencies: ["XCUtilityFramework"]),
+            dependencies: ["XCUtilityFramework"]
+        )
     ],
     swiftLanguageVersions: [.v5]
 )
