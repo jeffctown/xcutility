@@ -31,12 +31,8 @@ class FindXcodeProjectsTests: XCTestCase {
                                    verbose: false,
                                    path: Fixtures.fixtureSimpleProjectPath)
         let context = PipelineState(config: config)
-        do {
-            try testStep.run(context: context)
-            XCTAssertEqual(context.xcodeProjects.count, 1)
-        } catch {
-            XCTFail("Exception not expected. \(error.localizedDescription)")
-        }
+        try! testStep.run(context: context)
+        XCTAssertEqual(context.xcodeProjects.count, 2)
     }
 
     func testFixtureProjectsAreFound() {
@@ -46,13 +42,8 @@ class FindXcodeProjectsTests: XCTestCase {
                                    verbose: false,
                                    path: Fixtures.fixturesFolder)
         let context = PipelineState(config: config)
-        do {
-            try testStep.run(context: context)
-            XCTAssertEqual(context.xcodeProjects.count, 2)
-        } catch {
-            Log.shared.log(Fixtures.fixturesFolder)
-            XCTFail("Exception not expected. \(error.localizedDescription)")
-        }
+        try! testStep.run(context: context)
+        XCTAssertEqual(context.xcodeProjects.count, 2)
     }
 
     func testXcodeProjectCanBeExcluded() {
@@ -62,12 +53,8 @@ class FindXcodeProjectsTests: XCTestCase {
                                    verbose: false,
                                    path: Fixtures.fixturesFolder)
         let context = PipelineState(config: config)
-        do {
-            try testStep.run(context: context)
-            XCTAssertEqual(context.xcodeProjects.count, 1)
-        } catch {
-            XCTFail("Exception not expected. \(error.localizedDescription)")
-        }
+        try! testStep.run(context: context)
+        XCTAssertEqual(context.xcodeProjects.count, 1)
     }
 
     func testMultipleXcodeProjectsCanBeExcluded() {
@@ -77,12 +64,8 @@ class FindXcodeProjectsTests: XCTestCase {
                                    verbose: true,
                                    path: Fixtures.fixturesFolder)
         let context = PipelineState(config: config)
-        do {
-            try testStep.run(context: context)
-            XCTAssertEqual(context.xcodeProjects.count, 0)
-        } catch {
-            XCTFail("Exception not expected. \(error.localizedDescription)")
-        }
+        try! testStep.run(context: context)
+        XCTAssertEqual(context.xcodeProjects.count, 0)
     }
 
     func testInvalidXcodeProjectsFailsSilently() {
@@ -92,11 +75,7 @@ class FindXcodeProjectsTests: XCTestCase {
                                    verbose: true,
                                    path: Fixtures.fixtureInvalidProjectPath)
         let context = PipelineState(config: config)
-        do {
-            try testStep.run(context: context)
-            XCTAssertEqual(context.xcodeProjects.count, 0)
-        } catch {
-            XCTFail("Exception not expected. \(error.localizedDescription)")
-        }
+        try! testStep.run(context: context)
+        XCTAssertEqual(context.xcodeProjects.count, 0)
     }
 }

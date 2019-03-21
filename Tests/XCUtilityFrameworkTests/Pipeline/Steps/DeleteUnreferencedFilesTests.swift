@@ -41,14 +41,11 @@ class DeleteUnreferencedFilesTests: XCTestCase {
         context.unreferencedFiles.add(File(filename: swiftFilePath))
         context.unreferencedFiles.add(File(filename: objCHeaderPath))
         context.unreferencedFiles.add(File(filename: objCImplPath))
-        do {
-            try DeleteUnreferencedFiles().run(context: context)
-            XCTAssertFalse(FileManager.default.fileExists(atPath: swiftFilePath))
-            XCTAssertFalse(FileManager.default.fileExists(atPath: objCHeaderPath))
-            XCTAssertFalse(FileManager.default.fileExists(atPath: objCImplPath))
-            XCTAssertTrue(FileManager.default.fileExists(atPath: otherFilePath))
-        } catch {
-            XCTFail("Exception should not be thrown.")
-        }
+        
+        try! DeleteUnreferencedFiles().run(context: context)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: swiftFilePath))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: objCHeaderPath))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: objCImplPath))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: otherFilePath))
     }
 }
