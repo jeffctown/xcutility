@@ -19,7 +19,7 @@ matrix:
       language: objective-c
       osx_image: xcode10.2
       script:
-        - make xcodetest
+        - make codecoverage
       after_success:
         - bash -v <(curl -s https://codecov.io/bash)
     - name: "Swiftlint"
