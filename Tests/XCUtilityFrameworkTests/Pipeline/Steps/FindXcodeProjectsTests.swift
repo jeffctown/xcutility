@@ -32,7 +32,7 @@ class FindXcodeProjectsTests: XCTestCase {
                                    path: Fixtures.fixtureSimpleProjectPath)
         let context = PipelineState(config: config)
         try! testStep.run(context: context)
-        XCTAssertEqual(context.xcodeProjects.count, 2)
+        XCTAssertEqual(context.xcodeProjects.count, 1)
     }
 
     func testFixtureProjectsAreFound() {
