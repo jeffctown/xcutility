@@ -1,12 +1,12 @@
 #!/usr/bin/xcrun make -f
 
-XCODEMISSING_TEMPORARY_FOLDER?=/tmp/XcodeMissing.dst
+XCUTILITY_TEMPORARY_FOLDER?=/tmp/XCUtility.dst
 PREFIX?=/usr/local
 
-OUTPUT_PACKAGE=XcodeMissing.pkg
-FRAMEWORK_NAME=XcodeMissingFramework
+OUTPUT_PACKAGE=XUtility.pkg
+FRAMEWORK_NAME=XCUtilityFramework
 
-XCODEMISSING_EXECUTABLE=./.build/release/xcodemissing
+XCUTILITY_EXECUTABLE=./.build/release/xcutility
 BINARIES_FOLDER=/usr/local/bin
 
 # ZSH_COMMAND · run single command in `zsh` shell, ignoring most `zsh` startup files.
@@ -38,30 +38,30 @@ installables:
 	swift build -c release
 
 package: installables archive
-	$(MKDIR) "$(XCODEMISSING_TEMPORARY_FOLDER)$(BINARIES_FOLDER)"
-	$(CP) "$(XCODEMISSING_EXECUTABLE)" "$(XCODEMISSING_TEMPORARY_FOLDER)$(BINARIES_FOLDER)"
+	$(MKDIR) "$(XCUTILITY_TEMPORARY_FOLDER)$(BINARIES_FOLDER)"
+	$(CP) "$(XCUTILITY_EXECUTABLE)" "$(XCUTILITY_TEMPORARY_FOLDER)$(BINARIES_FOLDER)"
 
 	pkgbuild \
-		--identifier "com.jefflett.xcodemissing" \
+		--identifier "com.jefflett.xcutility" \
 		--install-location "/" \
-		--root "$(XCODEMISSING_TEMPORARY_FOLDER)" \
+		--root "$(XCUTILITY_TEMPORARY_FOLDER)" \
 		--version "$(VERSION_STRING)" \
 		"$(OUTPUT_PACKAGE)"
 
 install: installables
-	$(SUDO) $(CP) -f "$(XCODEMISSING_EXECUTABLE)" "$(BINARIES_FOLDER)"
+	$(SUDO) $(CP) -f "$(XCUTILITY_EXECUTABLE)" "$(BINARIES_FOLDER)"
 
 uninstall:
-	$(RM) "$(BINARIES_FOLDER)/xcodemissing"
+	$(RM) "$(BINARIES_FOLDER)/xcutility"
 
 xcodeproj:
 	swift package generate-xcodeproj
 
 xcodetest: xcodeproj
-	xcodebuild -scheme xcodemissing build test
+	xcodebuild -scheme xcutility build test
 
 codecoverage: xcodeproj
-	xcodebuild -scheme xcodemissing -enableCodeCoverage YES build test -quiet
+	xcodebuild -scheme xcutility -enableCodeCoverage YES build test -quiet
 
 archive:
 	carthage build --no-skip-current --platform mac

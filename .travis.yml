@@ -14,14 +14,14 @@ matrix:
       osx_image: xcode10.2
       script:
         - make test
-    - name: "Generate Xocde Coverage"
+    - name: "Generate Xcode Coverage"
       os: osx
       language: objective-c
       osx_image: xcode10.2
       script:
-        - make xcodetest
+        - make codecoverage
       after_success:
-        - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -s https://codecov.io/bash) -J 'XCUtilityFramework'
     - name: "Swiftlint"
       os: osx
       language: objective-c

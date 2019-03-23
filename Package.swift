@@ -4,28 +4,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "xcodemissing",
+    name: "xcutility",
     products: [
-        .library(
-            name: "XcodeMissingFramework",
-            targets: ["XcodeMissingFramework"]),
-        .executable(
-            name: "xcodemissing",
-            targets: ["xcodemissing"])
+        .library(name: "XCUtilityFramework", targets: ["XCUtilityFramework"]),
+        .executable(name: "xcutility", targets: ["xcutility"])
     ],
     dependencies: [
         .package(url: "https://github.com/tuist/xcodeproj.git", from: "6.5.0"),
-        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.15.0")
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.15.0"),
+        .package(url: "https://github.com/jpsim/Yams.git", from: "1.0.1")
     ],
     targets: [
-        .target(
-            name: "xcodemissing",
-            dependencies: ["XcodeMissingFramework","Commandant"]),
-        .target(
-            name: "XcodeMissingFramework",
-            dependencies: ["xcodeproj"]),
-        .testTarget(
-            name: "XcodeMissingFrameworkTests",
-            dependencies: ["XcodeMissingFramework"]),
-    ]
+        .target(name: "xcutility", dependencies: ["XCUtilityFramework","Commandant"]),
+        .target(name: "XCUtilityFramework", dependencies: ["xcodeproj","Yams"]),
+        .testTarget(name: "XCUtilityFrameworkTests", dependencies: ["XCUtilityFramework"])
+    ],
+    swiftLanguageVersions: [.v5]
 )
