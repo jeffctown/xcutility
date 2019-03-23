@@ -8,6 +8,7 @@
 import XCTest
 @testable import XCUtilityFramework
 
+// swiftlint:disable force_try
 class FindXcodeProjectsTests: XCTestCase {
     func testExceptionIsThrownWhenGivenABadPath() {
         let testStep = FindXcodeProjects()
