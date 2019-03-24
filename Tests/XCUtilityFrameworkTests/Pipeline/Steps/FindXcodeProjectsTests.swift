@@ -69,14 +69,14 @@ class FindXcodeProjectsTests: XCTestCase {
         XCTAssertEqual(context.xcodeProjects.count, 0)
     }
 
-    func testInvalidXcodeProjectsFailsSilently() {
-        let testStep = FindXcodeProjects()
-        let config = Configuration(excluded: [],
-                                   extensions: [],
-                                   verbose: true,
-                                   path: Fixtures.fixtureInvalidProjectPath)
-        let context = PipelineState(config: config)
-        try! testStep.run(context: context)
-        XCTAssertEqual(context.xcodeProjects.count, 0)
-    }
+//    func testInvalidXcodeProjectsFailsSilently() {
+//        let testStep = FindXcodeProjects()
+//        let config = Configuration(excluded: [],
+//                                   extensions: [],
+//                                   verbose: true,
+//                                   path: Fixtures.fixtureInvalidProjectPath)
+//        let context = PipelineState(config: config)
+//        try! testStep.run(context: context)
+//        XCTAssertEqual(context.xcodeProjects.count, 0)
+//    }
 }

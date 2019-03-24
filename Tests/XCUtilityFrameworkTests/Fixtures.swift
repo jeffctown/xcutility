@@ -12,7 +12,7 @@ class Fixtures {
     static let fixtureSimpleProjectPath = fixturesFolder.appending("SimpleProject/")
     static let fixtureSimpleProject = fixtureSimpleProjectPath + "SimpleProject.xcodeproj"
     static let fixtureCaseSensitivityPath = fixturesFolder.appending("CaseSensitivity/")
-    static let fixtureInvalidProjectPath = fixturesFolder.appending("InvalidProject/")
+//    static let fixtureInvalidProjectPath = fixturesFolder.appending("InvalidProject/")
     static let fixtureConfigPath = fixturesFolder.appending("Configs/")
     static let fixtureConfigSimplePath = fixtureConfigPath.appending("simple.yml")
     static let fixtureConfigEmptyPath = fixtureConfigPath.appending("empty.yml")
