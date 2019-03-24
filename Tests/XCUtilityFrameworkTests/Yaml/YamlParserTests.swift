@@ -39,7 +39,6 @@ class YamlParserTests: XCTestCase {
         do {
             let output = try YamlParser.parse(validYaml)
             XCTAssertNotNil(output["excluded"])
-            XCTAssertNotNil(output["xcodetools_version"])
         } catch {
             XCTFail("Parsing exception expected.")
         }
