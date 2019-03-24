@@ -3,7 +3,7 @@
 XCUTILITY_TEMPORARY_FOLDER?=/tmp/XCUtility.dst
 PREFIX?=/usr/local
 
-OUTPUT_PACKAGE=XUtility.pkg
+OUTPUT_PACKAGE=XCUtility.pkg
 FRAMEWORK_NAME=XCUtilityFramework
 
 XCUTILITY_EXECUTABLE=./.build/release/xcutility
