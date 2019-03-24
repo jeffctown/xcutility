@@ -1,1 +1,3 @@
 github "jpsim/Yams"
+github "tuist/xcodeproj"
+
