@@ -12,4 +12,3 @@ excluded:
 - .podspec
 - fastlane
 
-xcodetools_version: 0.2.0

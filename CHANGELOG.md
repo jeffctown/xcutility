@@ -16,6 +16,13 @@
 
 * None.
 
+## 0.2.0 (03/24/2019)
+
+#### Breaking
+
+* Renamed the tool `xcutility`
+* Renamed commands
+
 ## 0.1.2 (02/17/2019)
 
 #### Enhancements
