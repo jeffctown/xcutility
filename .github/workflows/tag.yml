@@ -1,0 +1,66 @@
+name: tag
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  release-xcframework:
+    runs-on: macos-latest
+    env:
+      PACKAGE_NAME: XCUtilityFramework # Edit This to be your Package's Name
+    steps:
+    - uses: actions/checkout@v2
+    - name: create xcode project
+      run: |
+        swift package generate-xcodeproj
+
+    - name: archive platform frameworks
+      run: |
+        set -o pipefail
+        platforms=("iOS" "iOS Simulator" "watchOS" "watchOS Simulator" "tvOS" "tvOS Simulator" "macOS")
+        for platform in "${platforms[@]}"; do
+          echo $platform
+          xcodebuild archive -project "$PACKAGE_NAME.xcodeproj" -scheme "$PACKAGE_NAME-Package" \
+            -destination "generic/platform=$platform" \
+            -archivePath "archives/$PACKAGE_NAME-$platform" \
+            SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES | xcpretty
+        done
+    - name: create xcframework
+      run: |
+        xcodebuild -create-xcframework \
+           -framework "archives/$PROJECT_NAME-iOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
+           -framework "archives/$PROJECT_NAME-iOS Simulator.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
+           -framework "archives/$PROJECT_NAME-watchOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
+           -framework "archives/$PROJECT_NAME-watchOS Simulator.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
+           -framework "archives/$PROJECT_NAME-tvOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
+           -framework "archives/$PROJECT_NAME-tvOS Simulator.xcarchive/Products/Library/Frameworks/v.framework" \
+           -framework "archives/$PROJECT_NAME-macOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
+           -output "$PACKAGE_NAME.xcframework"
+    - name: zip xcframework
+      run: |
+        zip -r "$PACKAGE_NAME.xcframework.zip" "$PACKAGE_NAME.xcframework"
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Release ${{ github.ref }}
+        draft: true
+        prerelease: true
+
+    - name: Add xcframework to Release
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./${{ env.PACKAGE_NAME }}.xcframework.zip
+        asset_name: ${{ env.PACKAGE_NAME }}.xcframework.zip
+        asset_content_type: application/zip
