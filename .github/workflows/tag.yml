@@ -1,0 +1,50 @@
+name: tag
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  release-xcframework:
+    runs-on: macos-latest
+    env:
+      PROJECT_NAME: xcutility
+      FRAMEWORK_NAME: XCUtilityFramework
+    steps:
+    - uses: actions/checkout@v2
+    - name: create xcode project
+      run: |
+        swift package generate-xcodeproj
+
+    - name: Create xcframework
+      id: create-xcframework
+      uses: jeffctown/create-xcframework@0.1.0-beta5
+      with:
+        project: ${{ env.PROJECT_NAME }}.xcodeproj
+        scheme: ${{ env.FRAMEWORK_NAME }}
+        framework: ${{ env.FRAMEWORK_NAME }}
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Release ${{ github.ref }}
+          Checksum ${{ steps.create-xcframework.outputs.checksum }}
+        draft: true
+        prerelease: true
+
+    - name: Add xcframework to Release
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ steps.create-xcframework.outputs.xcframework }}
+        asset_name: ${{ env.FRAMEWORK_NAME }}.xcframework.zip
+        asset_content_type: application/zip

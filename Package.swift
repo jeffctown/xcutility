@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "xcutility",
+    platforms: [
+        .iOS(.v11)
+    ],
     products: [
         .library(name: "XCUtilityFramework", targets: ["XCUtilityFramework"]),
         .executable(name: "xcutility", targets: ["xcutility"])
