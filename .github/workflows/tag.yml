@@ -1,4 +1,4 @@
-name: tag
+  name: tag
 on:
   push:
     tags:
@@ -8,7 +8,8 @@ jobs:
   release-xcframework:
     runs-on: macos-latest
     env:
-      PACKAGE_NAME: XCUtilityFramework # Edit This to be your Package's Name
+      PROJECT_NAME: xcutility
+      FRAMEWORK_NAME: XCUtilityFramework
     steps:
     - uses: actions/checkout@v2
     - name: create xcode project
@@ -21,25 +22,25 @@ jobs:
         platforms=("iOS" "iOS Simulator" "watchOS" "watchOS Simulator" "tvOS" "tvOS Simulator" "macOS")
         for platform in "${platforms[@]}"; do
           echo $platform
-          xcodebuild archive -project "$PACKAGE_NAME.xcodeproj" -scheme "$PACKAGE_NAME-Package" \
+          xcodebuild archive -project "$PROJECT_NAME.xcodeproj" -scheme "$FRAMEWORK_NAME" \
             -destination "generic/platform=$platform" \
-            -archivePath "archives/$PACKAGE_NAME-$platform" \
+            -archivePath "archives/$FRAMEWORK_NAME-$platform" \
             SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES | xcpretty
         done
     - name: create xcframework
       run: |
         xcodebuild -create-xcframework \
-           -framework "archives/$PROJECT_NAME-iOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
-           -framework "archives/$PROJECT_NAME-iOS Simulator.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
-           -framework "archives/$PROJECT_NAME-watchOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
-           -framework "archives/$PROJECT_NAME-watchOS Simulator.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
-           -framework "archives/$PROJECT_NAME-tvOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
-           -framework "archives/$PROJECT_NAME-tvOS Simulator.xcarchive/Products/Library/Frameworks/v.framework" \
-           -framework "archives/$PROJECT_NAME-macOS.xcarchive/Products/Library/Frameworks/$PACKAGE_NAME.framework" \
-           -output "$PACKAGE_NAME.xcframework"
+           -framework "archives/$FRAMEWORK_NAME-iOS.xcarchive/Products/Library/Frameworks/$FRAMEWORK_NAME.framework" \
+           -framework "archives/$FRAMEWORK_NAME-iOS Simulator.xcarchive/Products/Library/Frameworks/$FRAMEWORK_NAME.framework" \
+           -framework "archives/$FRAMEWORK_NAME-watchOS.xcarchive/Products/Library/Frameworks/$FRAMEWORK_NAME.framework" \
+           -framework "archives/$FRAMEWORK_NAME-watchOS Simulator.xcarchive/Products/Library/Frameworks/$FRAMEWORK_NAME.framework" \
+           -framework "archives/$FRAMEWORK_NAME-tvOS.xcarchive/Products/Library/Frameworks/$FRAMEWORK_NAME.framework" \
+           -framework "archives/$FRAMEWORK_NAME-tvOS Simulator.xcarchive/Products/Library/Frameworks/$FRAMEWORK_NAME.framework" \
+           -framework "archives/$FRAMEWORK_NAMEs-macOS.xcarchive/Products/Library/Frameworks/$FRAMEWORK_NAME.framework" \
+           -output "$FRAMEWORK_NAME.xcframework"
     - name: zip xcframework
       run: |
-        zip -r "$PACKAGE_NAME.xcframework.zip" "$PACKAGE_NAME.xcframework"
+        zip -r "$FRAMEWORK_NAME.xcframework.zip" "$FRAMEWORK_NAME.xcframework"
 
     - name: Create GitHub Release
       id: create_release
@@ -61,6 +62,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ env.PACKAGE_NAME }}.xcframework.zip
-        asset_name: ${{ env.PACKAGE_NAME }}.xcframework.zip
+        asset_path: ./${{ env.FRAMEWORK_NAME }}.xcframework.zip
+        asset_name: ${{ env.FRAMEWORK_NAME }}.xcframework.zip
         asset_content_type: application/zip
