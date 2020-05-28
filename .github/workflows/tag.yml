@@ -1,4 +1,4 @@
-  name: tag
+name: tag
 on:
   push:
     tags:
