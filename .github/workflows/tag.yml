@@ -11,14 +11,16 @@ jobs:
       PROJECT_NAME: xcutility
       FRAMEWORK_NAME: XCUtilityFramework
     steps:
+
     - uses: actions/checkout@v2
+
     - name: create xcode project
       run: |
         swift package generate-xcodeproj
 
     - name: Create xcframework
       id: create-xcframework
-      uses: jeffctown/create-xcframework@0.1.0
+      uses: jeffctown/create-xcframework@0.1.1
       with:
         project: ${{ env.PROJECT_NAME }}.xcodeproj
         scheme: ${{ env.FRAMEWORK_NAME }}
