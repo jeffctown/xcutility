@@ -25,6 +25,9 @@ jobs:
         project: ${{ env.PROJECT_NAME }}.xcodeproj
         scheme: ${{ env.FRAMEWORK_NAME }}
         framework: ${{ env.FRAMEWORK_NAME }}
+        watchos: false
+        tvos: "false"
+        ios: false
 
     - name: Create GitHub Release
       id: create-release
