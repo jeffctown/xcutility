@@ -18,14 +18,14 @@ jobs:
 
     - name: Create xcframework
       id: create-xcframework
-      uses: jeffctown/create-xcframework@0.1.0-beta5
+      uses: jeffctown/create-xcframework@0.1.0
       with:
         project: ${{ env.PROJECT_NAME }}.xcodeproj
         scheme: ${{ env.FRAMEWORK_NAME }}
         framework: ${{ env.FRAMEWORK_NAME }}
 
     - name: Create GitHub Release
-      id: create_release
+      id: create-release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,7 +44,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ steps.create-release.outputs.upload_url }}
         asset_path: ${{ steps.create-xcframework.outputs.xcframework }}
         asset_name: ${{ env.FRAMEWORK_NAME }}.xcframework.zip
         asset_content_type: application/zip
