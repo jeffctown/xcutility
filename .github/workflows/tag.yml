@@ -35,7 +35,6 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
         body: |
-          Release ${{ github.ref }}
           Checksum ${{ steps.create-xcframework.outputs.checksum }}
         draft: true
         prerelease: true
